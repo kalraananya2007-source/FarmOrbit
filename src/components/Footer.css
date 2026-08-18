@@ -1,0 +1,52 @@
+.footer {
+  background-color: var(--dark-green);
+  color: var(--pale-green);
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-about h3 {
+  color: var(--white);
+  margin-bottom: 10px;
+}
+
+.footer-about p {
+  max-width: 320px;
+  font-size: 14px;
+  color: var(--pale-green);
+}
+
+.footer-links h4,
+.footer-team h4 {
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.footer-links ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.footer-links ul li a:hover {
+  color: var(--light-green);
+}
+
+.footer-team p {
+  font-size: 14px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 14px;
+  font-size: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
