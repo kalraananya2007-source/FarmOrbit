@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ComingSoon from './pages/ComingSoon';
+import Farmer from './components/farmer';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         {/* Placeholder routes - teammates will replace these with real pages */}
-        <Route path="/farmer" element={<ComingSoon pageName="Farmer Module" />} />
+        <Route path="/farmer" element={<Farmer />} />
         <Route path="/marketplace" element={<ComingSoon pageName="Marketplace" />} />
         <Route path="/login" element={<ComingSoon pageName="Login" />} />
         <Route path="/register" element={<ComingSoon pageName="Register" />} />
