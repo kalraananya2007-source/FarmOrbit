@@ -1,25 +1,29 @@
 import { Link } from 'react-router-dom';
 import './Home.css';
+import cropImg from '../assets/crop.jpg';
+import marketplaceImg from '../assets/marketplace.jpg';
+import weatherImg from '../assets/weather.jpg';
+import communityImg from '../assets/community.jpg';
 
 // List of features shown as simple cards on the home page
 const features = [
   {
-    icon: '🌾',
+    image: cropImg,
     title: 'Crop Management',
     desc: 'Farmers can track their crops, sowing dates and expected harvest time.',
   },
   {
-    icon: '🛒',
+     image: marketplaceImg,
     title: 'Marketplace',
     desc: 'Connect directly with buyers and sell produce at fair prices.',
   },
   {
-    icon: '☀️',
+    image: weatherImg,
     title: 'Weather Updates',
     desc: 'Get simple weather information to plan farming activities better.',
   },
   {
-    icon: '👨‍🌾',
+    image: communityImg,
     title: 'Farmer Community',
     desc: 'A space for farmers to ask questions and share their experience.',
   },
@@ -53,7 +57,9 @@ function Home() {
         <div className="feature-grid">
           {features.map((item) => (
             <div className="feature-card" key={item.title}>
-              <div className="feature-icon">{item.icon}</div>
+            <div className="feature-image">
+  <img src={item.image} alt={item.title} />
+</div>
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
             </div>
