@@ -1,0 +1,156 @@
+/* Main Market Price Page */
+
+.market-page {
+    padding: 50px 8%;
+    background-color: #f5f8f3;
+    min-height: 600px;
+}
+
+/* Main Heading */
+
+.market-page h1 {
+    text-align: center;
+    color: #1b5e20;
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+/* Introduction text */
+
+.market-intro {
+    text-align: center;
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Search area */
+
+.market-search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.market-search input {
+    width: 400px;
+    padding: 14px 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.market-search input:focus {
+    border-color: #2e7d32;
+}
+
+/* Cards container */
+
+.market-price-list {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Individual card */
+
+.market-price-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.market-price-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Crop name */
+
+.market-price-card h2 {
+    color: #1b5e20;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+/* Market name */
+
+.market-name {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+/* Price */
+
+.crop-price {
+    color: #222;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Unit */
+
+.price-unit {
+    color: #777;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+/* Price change */
+
+.price-change {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.positive {
+    color: #2e7d32;
+}
+
+.negative {
+    color: #c62828;
+}
+
+/* No results */
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+    .market-price-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .market-page {
+        padding: 35px 5%;
+    }
+
+    .market-price-list {
+        grid-template-columns: 1fr;
+    }
+
+    .market-search input {
+        width: 100%;
+    }
+
+}
