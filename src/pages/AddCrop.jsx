@@ -2,7 +2,22 @@ function AddCrop() {
   return (
     <div>
       <h1>Add Crop</h1>
-      <p>Add a new crop to your farm.</p>
+
+      <form>
+        <label>Crop Name</label>
+        <input type="text" />
+
+        <label>Crop Type</label>
+        <input type="text" />
+
+        <label>Field Location</label>
+        <input type="text" />
+
+        <label>Planting Date</label>
+        <input type="date" />
+
+        <button type="submit">Add Crop</button>
+      </form>
     </div>
   );
 }
