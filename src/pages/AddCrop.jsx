@@ -1,6 +1,7 @@
+import './AddCrop.css';
 function AddCrop() {
   return (
-    <div>
+    <div className="add-crop">
       <h1>Add Crop</h1>
 
       <form>
