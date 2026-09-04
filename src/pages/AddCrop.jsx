@@ -6,12 +6,25 @@ function AddCrop() {
   const [cropType, setCropType] = useState('');
   const [fieldLocation, setFieldLocation] = useState('');
   const [plantingDate, setPlantingDate] = useState('');
+  const [error, setError] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!cropName || !cropType || !fieldLocation || !plantingDate) {
+      setError('Please fill all the fields.');
+      return;
+    }
+
+    setError('');
+    alert('Crop added successfully!');
+  }
 
   return (
     <div className="add-crop">
       <h1>Add Crop</h1>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Crop Name</label>
         <input
           type="text"
@@ -39,6 +52,8 @@ function AddCrop() {
           value={plantingDate}
           onChange={(e) => setPlantingDate(e.target.value)}
         />
+
+        {error && <p className="error-message">{error}</p>}
 
         <button type="submit">Add Crop</button>
       </form>
