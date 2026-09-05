@@ -16,8 +16,16 @@ function AddCrop() {
       return;
     }
 
-    setError('');
-    alert('Crop added successfully!');
+    const newCrop = {
+  name: cropName,
+  type: cropType,
+  location: fieldLocation,
+  plantingDate: plantingDate
+};
+
+console.log('New Crop:', newCrop);
+setError('');
+alert('Crop added successfully!');
   }
 
   return (
