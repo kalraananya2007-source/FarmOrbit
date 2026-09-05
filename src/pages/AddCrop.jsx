@@ -25,32 +25,44 @@ function AddCrop() {
       <h1>Add Crop</h1>
 
       <form onSubmit={handleSubmit}>
-        <label>Crop Name</label>
+        <label htmlFor="cropName">Crop Name</label>
         <input
+          id="cropName"
+          name="cropName"
           type="text"
           value={cropName}
           onChange={(e) => setCropName(e.target.value)}
+          required
         />
 
-        <label>Crop Type</label>
+        <label htmlFor="cropType">Crop Type</label>
         <input
+          id="cropType"
+          name="cropType"
           type="text"
           value={cropType}
           onChange={(e) => setCropType(e.target.value)}
+          required
         />
 
-        <label>Field Location</label>
+        <label htmlFor="fieldLocation">Field Location</label>
         <input
+          id="fieldLocation"
+          name="fieldLocation"
           type="text"
           value={fieldLocation}
           onChange={(e) => setFieldLocation(e.target.value)}
+          required
         />
 
-        <label>Planting Date</label>
+        <label htmlFor="plantingDate">Planting Date</label>
         <input
+          id="plantingDate"
+          name="plantingDate"
           type="date"
           value={plantingDate}
           onChange={(e) => setPlantingDate(e.target.value)}
+          required
         />
 
         {error && <p className="error-message">{error}</p>}
