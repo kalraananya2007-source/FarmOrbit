@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
-  // menuOpen controls whether mobile menu is visible or not
+function Navbar({ onLoginClick }) {
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -14,80 +13,49 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
 
-        {/* Logo */}
-        <Link to="/" className="navbar-logo">
+        <div className="navbar-logo">
           🌱 FarmOrbit
-        </Link>
+        </div>
 
-        {/* Hamburger icon - only visible on mobile */}
         <div className="menu-icon" onClick={toggleMenu}>
           {menuOpen ? '✕' : '☰'}
         </div>
 
-        {/* Navigation Links */}
-        <ul
-          className={
-            menuOpen ? 'navbar-links active' : 'navbar-links'
-          }
-        >
-          {/* Home */}
+        <ul className={menuOpen ? 'navbar-links active' : 'navbar-links'}>
+
           <li>
-            <Link
-              to="/"
-              onClick={() => setMenuOpen(false)}
-            >
+            <button onClick={() => setMenuOpen(false)}>
               Home
-            </Link>
+            </button>
           </li>
 
-          {/* Farmer Module */}
           <li>
-            <Link
-              to="/farmer"
-              onClick={() => setMenuOpen(false)}
-            >
+            <button onClick={() => setMenuOpen(false)}>
               Farmer Module
-            </Link>
+            </button>
           </li>
 
-          {/* Weather */}
           <li>
-            <Link
-              to="/weather"
-              onClick={() => setMenuOpen(false)}
-            >
-              Weather
-            </Link>
-          </li>
-
-          {/* Marketplace */}
-          <li>
-            <Link
-              to="/marketplace"
-              onClick={() => setMenuOpen(false)}
-            >
+            <button onClick={() => setMenuOpen(false)}>
               Marketplace
-            </Link>
+            </button>
           </li>
 
-          {/* Login & Register */}
           <li className="navbar-buttons">
-            <Link
-              to="/login"
+
+            <button
+              onClick={onLoginClick}
               className="btn btn-outline"
-              onClick={() => setMenuOpen(false)}
             >
               Login
-            </Link>
+            </button>
 
-            <Link
-              to="/register"
-              className="btn btn-primary"
-              onClick={() => setMenuOpen(false)}
-            >
+            <button className="btn btn-primary">
               Register
-            </Link>
+            </button>
+
           </li>
+
         </ul>
 
       </div>
