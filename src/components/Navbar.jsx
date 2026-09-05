@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import './Navbar.css';
 
-function Navbar({ onLoginClick }) {
-
+function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -24,40 +25,46 @@ function Navbar({ onLoginClick }) {
         <ul className={menuOpen ? 'navbar-links active' : 'navbar-links'}>
 
           <li>
-            <button onClick={() => setMenuOpen(false)}>
+            <Link to="/" onClick={() => setMenuOpen(false)}>
               Home
-            </button>
+            </Link>
           </li>
 
           <li>
-            <button onClick={() => setMenuOpen(false)}>
+            <Link to="/farmer" onClick={() => setMenuOpen(false)}>
               Farmer Module
-            </button>
+            </Link>
           </li>
 
           <li>
-            <button onClick={() => setMenuOpen(false)}>
+            <Link to="/weather" onClick={() => setMenuOpen(false)}>
+              Weather
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/marketplace" onClick={() => setMenuOpen(false)}>
               Marketplace
-            </button>
+            </Link>
           </li>
 
           <li className="navbar-buttons">
 
-            <button
-              onClick={onLoginClick}
-              className="btn btn-outline"
-            >
-              Login
-            </button>
+            <Link to="/login" onClick={() => setMenuOpen(false)}>
+              <button className="btn btn-outline">
+                Login
+              </button>
+            </Link>
 
-            <button className="btn btn-primary">
-              Register
-            </button>
+            <Link to="/register" onClick={() => setMenuOpen(false)}>
+              <button className="btn btn-primary">
+                Register
+              </button>
+            </Link>
 
           </li>
 
         </ul>
-
       </div>
     </nav>
   );
