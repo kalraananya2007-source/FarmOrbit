@@ -8,9 +8,7 @@ import ComingSoon from './pages/ComingSoon';
 
 import Farmer from './components/farmer';
 import Weather from './weather/weather';
-
-import CropRecommendations from './weather/croprec';
-import MarketPrice from './weather/marketprice';
+import Profile from "./components/profile";
 
 function App() {
   return (
@@ -24,15 +22,13 @@ function App() {
         {/* Farmer Module */}
         <Route path="/farmer" element={<Farmer />} />
 
+        <Route path="/profile" element={<Profile />} />
+        
         {/* Weather Module */}
         <Route path="/weather" element={<Weather />} />
 
-        {/* Crop Recommendation Module */}
-        <Route path="/crop-recommendation" element={<CropRecommendations />} />
-
-        {/* Market Price Module */}
-        <Route path="/market-price" element={<MarketPrice />} />
         
+
         {/* Marketplace - Coming Soon for now */}
         <Route
           path="/marketplace"
