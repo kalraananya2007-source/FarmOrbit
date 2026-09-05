@@ -7,7 +7,7 @@ function AddCrop() {
   const [fieldLocation, setFieldLocation] = useState('');
   const [plantingDate, setPlantingDate] = useState('');
   const [error, setError] = useState('');
-
+  const [crops, setCrops] = useState([]);
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -17,13 +17,18 @@ function AddCrop() {
     }
 
     const newCrop = {
-      name: cropName,
-      type: cropType,
-      location: fieldLocation,
-      plantingDate: plantingDate
-    };
+  name: cropName,
+  type: cropType,
+  location: fieldLocation,
+  plantingDate: plantingDate
+};
 
-    console.log('New Crop:', newCrop);
+const updatedCrops = [...crops, newCrop];
+
+setCrops(updatedCrops);
+localStorage.setItem('crops', JSON.stringify(updatedCrops));
+
+console.log('New Crop:', newCrop);
     setError('');
     alert('Crop added successfully!');
 
