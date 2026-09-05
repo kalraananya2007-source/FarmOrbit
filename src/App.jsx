@@ -8,7 +8,7 @@ import ComingSoon from './pages/ComingSoon';
 
 import Farmer from './components/farmer';
 import Weather from './weather/weather';
-import Profile from "./components/profile";
+import Profile from "./components/profile.jsx";
 
 function App() {
   return (
