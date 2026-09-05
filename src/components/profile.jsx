@@ -2,42 +2,47 @@ import "./profile.css";
 
 function Profile() {
   return (
-    <div className="profile">
-      <h2>Farmer Profile</h2>
+    <div className="profile-page">
 
-      <table border="1" cellPadding="10">
-        <tbody>
-          <tr>
-            <td>Full Name</td>
-            <td>Ananya Kalra</td>
-          </tr>
+      <div className="profile-card">
+        <h2>Farmer Profile</h2>
+        <p>My personal information</p>
 
-          <tr>
-            <td>Email</td>
-            <td>farmer@example.com</td>
-          </tr>
+        <table>
+          <tbody>
+            <tr>
+              <td>Full Name</td>
+              <td>Rahul Kumar</td>
+            </tr>
 
-          <tr>
-            <td>Phone Number</td>
-            <td>9876543210</td>
-          </tr>
+            <tr>
+              <td>Email</td>
+              <td>rahul@example.com</td>
+            </tr>
 
-          <tr>
-            <td>Village</td>
-            <td>Rampur</td>
-          </tr>
+            <tr>
+              <td>Phone Number</td>
+              <td>9876543210</td>
+            </tr>
 
-          <tr>
-            <td>District</td>
-            <td>Delhi</td>
-          </tr>
+            <tr>
+              <td>Village</td>
+              <td>Rampur</td>
+            </tr>
 
-          <tr>
-            <td>State</td>
-            <td>Delhi</td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <td>District</td>
+              <td>Bareilly</td>
+            </tr>
+
+            <tr>
+              <td>State</td>
+              <td>Uttar Pradesh</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 }

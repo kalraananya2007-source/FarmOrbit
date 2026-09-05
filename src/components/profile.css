@@ -1,29 +1,42 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 50px 20px;
+  background-color: #f5f8ed;
+}
 
-.profile {
-  width: 500px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #f5f5f5;
+.profile-card {
+  width: 600px;
+  max-width: 90%;
+  margin: auto;
+  padding: 30px;
+  background-color: white;
   border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile h2 {
+.profile-card h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
-.profile table {
+.profile-card p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.profile-card table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
 }
 
-.profile td {
-  padding: 12px;
-  border: 1px solid #ccc;
+.profile-card td {
+  padding: 14px;
+  border: 1px solid #ddd;
 }
 
-.profile td:first-child {
+.profile-card td:first-child {
   font-weight: bold;
   width: 40%;
+  background-color: #f1f8ee;
 }
