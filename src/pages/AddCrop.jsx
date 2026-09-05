@@ -17,15 +17,20 @@ function AddCrop() {
     }
 
     const newCrop = {
-  name: cropName,
-  type: cropType,
-  location: fieldLocation,
-  plantingDate: plantingDate
-};
+      name: cropName,
+      type: cropType,
+      location: fieldLocation,
+      plantingDate: plantingDate
+    };
 
-console.log('New Crop:', newCrop);
-setError('');
-alert('Crop added successfully!');
+    console.log('New Crop:', newCrop);
+    setError('');
+    alert('Crop added successfully!');
+
+    setCropName('');
+    setCropType('');
+    setFieldLocation('');
+    setPlantingDate('');
   }
 
   return (
