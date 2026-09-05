@@ -8,7 +8,8 @@ import ComingSoon from './pages/ComingSoon';
 
 import Farmer from './components/farmer';
 import Weather from './weather/weather';
-import Profile from "./components/profile.jsx";
+import Profile from './components/profile.jsx';
+import Login from './pages/login';
 
 function App() {
   return (
@@ -22,31 +23,22 @@ function App() {
         {/* Farmer Module */}
         <Route path="/farmer" element={<Farmer />} />
 
+        {/* Profile Page */}
         <Route path="/profile" element={<Profile />} />
-        
+
         {/* Weather Module */}
         <Route path="/weather" element={<Weather />} />
 
-        
+        {/* Login Page */}
+        <Route path="/login" element={<Login />} />
 
-        {/* Marketplace - Coming Soon for now */}
+        {/* Marketplace - Coming Soon */}
         <Route
           path="/marketplace"
           element={
             <ComingSoon
               title="Marketplace"
               message="Marketplace feature is coming soon."
-            />
-          }
-        />
-
-        {/* Login - Coming Soon */}
-        <Route
-          path="/login"
-          element={
-            <ComingSoon
-              title="Login"
-              message="Login feature is coming soon."
             />
           }
         />
