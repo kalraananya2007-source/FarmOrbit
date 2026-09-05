@@ -1,9 +1,10 @@
 
 import { Link } from "react-router-dom";
+import FarmerNavbar from "./farmerNavbar";
 import "./farmer.css";
 
 function Farmer() {
-  // Dummy crop data for now (Step 1 only — no real data/backend yet)
+  // Dummy crop data for now
   const recentCrops = [
     { id: 1, name: "Wheat", status: "Growing" },
     { id: 2, name: "Rice", status: "Harvested" },
@@ -12,6 +13,9 @@ function Farmer() {
 
   return (
     <div className="farmer-container">
+
+      {/* Farmer Navbar */}
+      <FarmerNavbar />
 
       {/* Welcome Section */}
       <section className="farmer-welcome">
@@ -80,5 +84,3 @@ function Farmer() {
 }
 
 export default Farmer;
-
-
