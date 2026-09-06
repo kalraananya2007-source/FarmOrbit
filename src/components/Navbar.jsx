@@ -60,15 +60,15 @@ function Navbar() {
             </Link>
           </li>
 
-          {/* Marketplace */}
-          <li>
-            <Link
-              to="/marketplace"
-              onClick={() => setMenuOpen(false)}
-            >
-              Marketplace
-            </Link>
-          </li>
+          {/* Marketprice */}
+<li>
+  <Link
+    to="/market-price"
+    onClick={() => setMenuOpen(false)}
+  >
+    Marketprice
+  </Link>
+</li>
 
           {/* Login & Register */}
           <li className="navbar-buttons">
