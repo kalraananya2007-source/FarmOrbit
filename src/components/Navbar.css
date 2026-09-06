@@ -6,41 +6,86 @@
   z-index: 100;
 }
 
+
 .navbar-container {
-  max-width: 1100px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 40px; /* 👈 ye add karo — logo aur links ke beech gap */
 }
 
 .navbar-logo {
   font-size: 22px;
   font-weight: 700;
   color: var(--dark-green);
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* logo kabhi wrap na ho */
 }
-
+/* Navigation links */
 .navbar-links {
   display: flex;
   align-items: center;
   gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar-links li a {
+.navbar-links li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Home, Farmer Module, Marketplace */
+.navbar-links li:not(.navbar-buttons) button {
+  font-family: inherit;
+  font-size: 16px;
   font-weight: 500;
   color: var(--text-dark);
+  background: transparent;
+  border: none;
+  padding: 5px 0;
+  margin: 0;
+  cursor: pointer;
 }
 
-.navbar-links li a:hover {
+.navbar-links li:not(.navbar-buttons) button:hover {
   color: var(--primary-green);
 }
 
+/* Login + Register */
 .navbar-buttons {
   display: flex;
+  align-items: center;
   gap: 12px;
 }
 
+.navbar-buttons .btn {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.navbar-buttons .btn-outline {
+  background: transparent;
+  border: 1px solid var(--primary-green);
+  color: var(--primary-green);
+}
+
+.navbar-buttons .btn-primary {
+  background-color: var(--primary-green);
+  border: 1px solid var(--primary-green);
+  color: var(--white);
+}
+
+/* Mobile menu icon */
 .menu-icon {
   display: none;
   font-size: 26px;
@@ -50,6 +95,7 @@
 
 /* Responsive - mobile menu */
 @media (max-width: 768px) {
+
   .menu-icon {
     display: block;
   }
@@ -72,9 +118,23 @@
     display: flex;
   }
 
+  .navbar-links li {
+    width: 100%;
+  }
+
+  .navbar-links li:not(.navbar-buttons) button {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+
   .navbar-buttons {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    gap: 10px;
+  }
+
+  .navbar-buttons .btn {
+    width: auto;
   }
 }

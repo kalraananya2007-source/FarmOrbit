@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import './Navbar.css';
 
 function Navbar() {
-  // menuOpen controls whether mobile menu is visible or not
   const [menuOpen, setMenuOpen] = useState(false);
 
   function toggleMenu() {
@@ -14,82 +14,63 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
 
-        {/* Logo */}
-        <Link to="/" className="navbar-logo">
+        <div className="navbar-logo">
           🌱 FarmOrbit
-        </Link>
+        </div>
 
-        {/* Hamburger icon - only visible on mobile */}
         <div className="menu-icon" onClick={toggleMenu}>
           {menuOpen ? '✕' : '☰'}
         </div>
 
-        {/* Navigation Links */}
-        <ul
-          className={
-            menuOpen ? 'navbar-links active' : 'navbar-links'
-          }
-        >
-          {/* Home */}
+        <ul className={menuOpen ? 'navbar-links active' : 'navbar-links'}>
+
           <li>
-            <Link
-              to="/"
-              onClick={() => setMenuOpen(false)}
-            >
+            <Link to="/" onClick={() => setMenuOpen(false)}>
               Home
             </Link>
           </li>
 
-          {/* Farmer Module */}
           <li>
-            <Link
-              to="/farmer"
-              onClick={() => setMenuOpen(false)}
-            >
+            <Link to="/farmer" onClick={() => setMenuOpen(false)}>
               Farmer Module
             </Link>
           </li>
 
-          {/* Weather */}
           <li>
-            <Link
-              to="/weather"
-              onClick={() => setMenuOpen(false)}
-            >
+            <Link to="/weather" onClick={() => setMenuOpen(false)}>
               Weather
             </Link>
           </li>
 
-          {/* Marketprice */}
-<li>
-  <Link
-    to="/market-price"
-    onClick={() => setMenuOpen(false)}
-  >
-    Marketprice
-  </Link>
-</li>
-
-          {/* Login & Register */}
-          <li className="navbar-buttons">
-            <Link
-              to="/login"
-              className="btn btn-outline"
-              onClick={() => setMenuOpen(false)}
-            >
-              Login
-            </Link>
-
-            <Link
-              to="/register"
-              className="btn btn-primary"
-              onClick={() => setMenuOpen(false)}
-            >
-              Register
+          <li>
+            <Link to="/market-price" onClick={() => setMenuOpen(false)}>
+              Market Price
             </Link>
           </li>
-        </ul>
 
+          <li>
+            <Link to="/marketplace" onClick={() => setMenuOpen(false)}>
+              Marketplace
+            </Link>
+          </li>
+
+          <li className="navbar-buttons">
+
+            <Link to="/login" onClick={() => setMenuOpen(false)}>
+              <button className="btn btn-outline">
+                Login
+              </button>
+            </Link>
+
+            <Link to="/register" onClick={() => setMenuOpen(false)}>
+              <button className="btn btn-primary">
+                Register
+              </button>
+            </Link>
+
+          </li>
+
+        </ul>
       </div>
     </nav>
   );

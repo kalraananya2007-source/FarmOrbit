@@ -1,0 +1,30 @@
+
+.farmer-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 30px;
+
+  background-color: #2e7d32;
+}
+
+.farmer-navbar h2 {
+  color: white;
+  margin: 0;
+}
+
+.farmer-nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.farmer-nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.farmer-nav-links a:hover {
+  text-decoration: underline;
+}
