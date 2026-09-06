@@ -26,6 +26,7 @@ function Navbar() {
           <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
           <li><Link to="/farmer" onClick={() => setMenuOpen(false)}>Farmer Module</Link></li>
           <li><Link to="/marketplace" onClick={() => setMenuOpen(false)}>Marketplace</Link></li>
+          <li><Link to="/my-crops" onClick={() => setMenuOpen(false)}>My Crops</Link></li>
           <li className="navbar-buttons">
             <Link to="/login" className="btn btn-outline">Login</Link>
             <Link to="/register" className="btn btn-primary">Register</Link>
