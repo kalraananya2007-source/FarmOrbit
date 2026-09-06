@@ -1,9 +1,9 @@
-
-import { Link } from "react-router-dom";
 import FarmerNavbar from "./farmerNavbar";
+
 import "./farmer.css";
 
 function Farmer() {
+
   // Dummy crop data for now
   const recentCrops = [
     { id: 1, name: "Wheat", status: "Growing" },
@@ -21,10 +21,6 @@ function Farmer() {
       <section className="farmer-welcome">
         <h1>Welcome, Farmer!</h1>
         <p>Here's a quick overview of your farm activity.</p>
-
-        <Link to="/profile">
-          <button className="profile-btn">My Profile</button>
-        </Link>
       </section>
 
       {/* Stats Section */}

@@ -1,21 +1,23 @@
 .farmer-container {
-  padding: 2.5rem 2rem;
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 4rem;
+  margin: 0;
+  box-sizing: border-box;
   font-family: inherit;
 }
 
-/* ================= Welcome section ================= */
+/* Welcome Section */
+
 .farmer-welcome {
   margin-bottom: 2.5rem;
 }
 
 .farmer-welcome h1 {
   color: #1b5e20;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 0.4rem;
-  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
 }
 
 .farmer-welcome p {
@@ -23,37 +25,30 @@
   font-size: 1rem;
 }
 
-/* ================= Stats section ================= */
+/* Stats Section */
+
 .farmer-stats {
-  display: flex;
-  gap: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   margin-bottom: 2.5rem;
-  flex-wrap: wrap;
 }
 
 .stat-card {
-  flex: 1;
-  min-width: 150px;
   background-color: #ffffff;
   border: 1px solid #dcedc8;
-  border-left: 4px solid #2e7d32;
+  border-left: 5px solid #2e7d32;
   border-radius: 10px;
-  padding: 1.2rem;
+  padding: 1.5rem;
   text-align: center;
   box-shadow: 0 2px 6px rgba(46, 125, 50, 0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
 }
 
 .stat-card h2 {
   color: #2e7d32;
-  font-size: 2.1rem;
+  font-size: 2.3rem;
   font-weight: 700;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
 }
 
 .stat-card p {
@@ -64,12 +59,15 @@
   letter-spacing: 0.5px;
 }
 
-/* ================= Recent crops section ================= */
+/* Recent Crops Section */
+
 .farmer-recent-crops {
+  width: 100%;
+  box-sizing: border-box;
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  padding: 1.5rem 1.8rem;
+  padding: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -77,14 +75,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.3rem;
-  padding-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid #eee;
 }
 
 .recent-crops-header h2 {
   color: #1b5e20;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
@@ -92,54 +90,55 @@
   background-color: #2e7d32;
   color: white;
   border: none;
-  padding: 0.55rem 1.2rem;
+  padding: 0.65rem 1.3rem;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: 0 2px 5px rgba(46, 125, 50, 0.3);
-  transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
 .add-crop-btn:hover {
   background-color: #256428;
-  transform: translateY(-1px);
 }
 
-.crop-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+/* Recent Crops List */
+
+.farmer-recent-crops .crop-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem;
+  width: 100%;
 }
 
-.crop-card {
-  display: flex;
+/* Each Crop */
+
+.farmer-recent-crops .crop-card {
+  width: 100% !important;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: row !important;
   justify-content: space-between;
   align-items: center;
-  background: #fafafa;
+
+  background-color: #fafafa;
   border: 1px solid #eee;
   border-radius: 8px;
-  padding: 0.8rem 1.2rem;
-  transition: background-color 0.15s ease;
-}
 
-.crop-card:hover {
-  background-color: #f1f8f1;
+  padding: 1rem 1.3rem;
+  margin: 0;
 }
 
 .crop-name {
   font-weight: 600;
   color: #333;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .crop-status {
   font-size: 0.78rem;
   font-weight: 600;
-  padding: 0.3rem 0.75rem;
+  padding: 0.35rem 0.8rem;
   border-radius: 20px;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 
 .crop-status.growing {
@@ -152,53 +151,30 @@
   color: #155724;
 }
 
-/* ================= Responsive behavior ================= */
-@media (max-width: 600px) {
+/* Mobile */
+
+@media (max-width: 768px) {
   .farmer-container {
     padding: 1.5rem 1rem;
   }
 
-  .farmer-welcome h1 {
-    font-size: 1.6rem;
-  }
-
   .farmer-stats {
-    flex-direction: column;
-  }
-
-  .stat-card {
-    min-width: 100%;
+    grid-template-columns: 1fr;
   }
 
   .recent-crops-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.7rem;
+    gap: 1rem;
   }
 
   .add-crop-btn {
     width: 100%;
   }
 
-  .crop-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
+  .farmer-recent-crops .crop-card {
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
   }
-}
-
-
-.profile-btn {
-  padding: 10px 20px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.profile-btn:hover {
-  background-color: #45a049;
 }
