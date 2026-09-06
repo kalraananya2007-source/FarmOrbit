@@ -11,6 +11,9 @@ import Weather from './weather/weather';
 import Profile from './components/profile.jsx';
 import Login from './pages/login';
 
+import CropRecommendations from './weather/croprec';
+import MarketPrice from './weather/marketprice';
+
 function App() {
   return (
     <>
@@ -29,9 +32,20 @@ function App() {
         {/* Weather Module */}
         <Route path="/weather" element={<Weather />} />
 
+        {/* Crop Recommendation */}
+        <Route
+          path="/crop-recommendation"
+          element={<CropRecommendations />}
+        />
+
+        {/* Market Price */}
+        <Route
+          path="/market-price"
+          element={<MarketPrice />}
+        />
+
         {/* Login Page */}
         <Route path="/login" element={<Login />} />
-
         {/* Marketplace - Coming Soon */}
         <Route
           path="/marketplace"
