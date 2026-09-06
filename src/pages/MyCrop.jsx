@@ -12,6 +12,7 @@ function MyCrops() {
   return (
     <div className="my-crops">
       <h1>My Crops</h1>
+      <p>Total Crops: {crops.length}</p>
 
       {crops.length === 0 ? (
         <p className="no-crops">No crops added yet.</p>
