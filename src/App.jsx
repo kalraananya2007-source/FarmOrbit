@@ -13,6 +13,7 @@ import Login from './pages/login';
 
 import CropRecommendations from './weather/croprec';
 import MarketPrice from './weather/marketprice';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -57,16 +58,7 @@ function App() {
           }
         />
 
-        {/* Register - Coming Soon */}
-        <Route
-          path="/register"
-          element={
-            <ComingSoon
-              title="Register"
-              message="Registration feature is coming soon."
-            />
-          }
-        />
+        <Route path="/register" element={<Register />} />
 
         {/* Any wrong URL */}
         <Route
