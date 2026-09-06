@@ -1,0 +1,31 @@
+.my-crops {
+  padding: 40px;
+}
+
+.my-crops h1 {
+  margin-bottom: 25px;
+}
+
+.crop-list {
+  display: grid;
+  gap: 20px;
+}
+
+.crop-card {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.crop-card h2 {
+  margin-bottom: 12px;
+}
+
+.crop-card p {
+  margin: 8px 0;
+}
+
+.no-crops {
+  margin-top: 20px;
+}

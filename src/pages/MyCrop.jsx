@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './MyCrop.css';
 
 function MyCrops() {
   const [crops, setCrops] = useState([]);
@@ -9,20 +10,22 @@ function MyCrops() {
   }, []);
 
   return (
-    <div>
+    <div className="my-crops">
       <h1>My Crops</h1>
 
       {crops.length === 0 ? (
-        <p>No crops added yet.</p>
+        <p className="no-crops">No crops added yet.</p>
       ) : (
-        crops.map((crop, index) => (
-          <div key={index}>
-            <h2>{crop.name}</h2>
-            <p>Type: {crop.type}</p>
-            <p>Location: {crop.location}</p>
-            <p>Planting Date: {crop.plantingDate}</p>
-          </div>
-        ))
+        <div className="crop-list">
+          {crops.map((crop, index) => (
+            <div className="crop-card" key={index}>
+              <h2>{crop.name}</h2>
+              <p><strong>Type:</strong> {crop.type}</p>
+              <p><strong>Location:</strong> {crop.location}</p>
+              <p><strong>Planting Date:</strong> {crop.plantingDate}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
