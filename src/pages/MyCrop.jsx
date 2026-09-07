@@ -9,6 +9,12 @@ function MyCrops() {
     setCrops(savedCrops);
   }, []);
   function deleteCrop(index) {
+  const confirmed = window.confirm('Are you sure you want to delete this crop?');
+
+  if (!confirmed) {
+    return;
+  }
+
   const updatedCrops = crops.filter((_, cropIndex) => cropIndex !== index);
 
   setCrops(updatedCrops);
