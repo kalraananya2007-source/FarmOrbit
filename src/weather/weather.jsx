@@ -152,7 +152,128 @@ const weatherData = {
             { day: "Day 4", temp: 30 },
             { day: "Day 5", temp: 32 }
         ]
-    }
+    },
+
+    Shimla: {
+    temperature: 22,
+    condition: "Cloudy",
+    humidity: 72,
+    windSpeed: 10,
+    rainChance: 40,
+    forecast: [
+        { day: "Today", temp: 22 },
+        { day: "Tomorrow", temp: 23 },
+        { day: "Day 3", temp: 21 },
+        { day: "Day 4", temp: 20 },
+        { day: "Day 5", temp: 22 }
+    ]
+},
+
+Manali: {
+    temperature: 18,
+    condition: "Partly Cloudy",
+    humidity: 75,
+    windSpeed: 9,
+    rainChance: 45,
+    forecast: [
+        { day: "Today", temp: 18 },
+        { day: "Tomorrow", temp: 19 },
+        { day: "Day 3", temp: 17 },
+        { day: "Day 4", temp: 16 },
+        { day: "Day 5", temp: 18 }
+    ]
+},
+
+Kangra: {
+    temperature: 25,
+    condition: "Cloudy",
+    humidity: 70,
+    windSpeed: 11,
+    rainChance: 35,
+    forecast: [
+        { day: "Today", temp: 25 },
+        { day: "Tomorrow", temp: 26 },
+        { day: "Day 3", temp: 24 },
+        { day: "Day 4", temp: 23 },
+        { day: "Day 5", temp: 25 }
+    ]
+},
+
+Solan: {
+    temperature: 24,
+    condition: "Partly Cloudy",
+    humidity: 65,
+    windSpeed: 10,
+    rainChance: 30,
+    forecast: [
+        { day: "Today", temp: 24 },
+        { day: "Tomorrow", temp: 25 },
+        { day: "Day 3", temp: 23 },
+        { day: "Day 4", temp: 22 },
+        { day: "Day 5", temp: 24 }
+    ]
+},
+
+Jaipur: {
+    temperature: 35,
+    condition: "Sunny",
+    humidity: 45,
+    windSpeed: 18,
+    rainChance: 10,
+    forecast: [
+        { day: "Today", temp: 35 },
+        { day: "Tomorrow", temp: 36 },
+        { day: "Day 3", temp: 34 },
+        { day: "Day 4", temp: 33 },
+        { day: "Day 5", temp: 35 }
+    ]
+},
+
+Jodhpur: {
+    temperature: 37,
+    condition: "Sunny",
+    humidity: 38,
+    windSpeed: 20,
+    rainChance: 8,
+    forecast: [
+        { day: "Today", temp: 37 },
+        { day: "Tomorrow", temp: 38 },
+        { day: "Day 3", temp: 36 },
+        { day: "Day 4", temp: 35 },
+        { day: "Day 5", temp: 37 }
+    ]
+},
+
+Udaipur: {
+    temperature: 31,
+    condition: "Partly Cloudy",
+    humidity: 55,
+    windSpeed: 13,
+    rainChance: 20,
+    forecast: [
+        { day: "Today", temp: 31 },
+        { day: "Tomorrow", temp: 32 },
+        { day: "Day 3", temp: 30 },
+        { day: "Day 4", temp: 29 },
+        { day: "Day 5", temp: 31 }
+    ]
+},
+
+Kota: {
+    temperature: 34,
+    condition: "Cloudy",
+    humidity: 52,
+    windSpeed: 15,
+    rainChance: 25,
+    forecast: [
+        { day: "Today", temp: 34 },
+        { day: "Tomorrow", temp: 35 },
+        { day: "Day 3", temp: 33 },
+        { day: "Day 4", temp: 32 },
+        { day: "Day 5", temp: 34 }
+    ]
+},    
+
 };
 
 // Component for current weather information
