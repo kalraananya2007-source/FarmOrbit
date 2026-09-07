@@ -1,6 +1,25 @@
 import React, { useState } from "react";
 import "./marketprice.css";
-import cropsImage from "../assets/cropphoto.png";
+
+import wheatImage from "../assets/wheat.png";
+import riceImage from "../assets/rice.png";
+import maizeImage from "../assets/maize.png";
+import cottonImage from "../assets/cotton.png";
+import mustardImage from "../assets/mustard.png";
+import potatoImage from "../assets/potato.png";
+import tomatoImage from "../assets/tomato.png";
+import onionImage from "../assets/onion.png";
+
+const cropImages = {
+    Wheat: wheatImage,
+    Rice: riceImage,
+    Maize: maizeImage,
+    Cotton: cottonImage,
+    Mustard: mustardImage,
+    Potato: potatoImage,
+    Tomato: tomatoImage,
+    Onion: onionImage
+};
 
 const marketData = [
     { crop: "Wheat", market: "Amritsar Mandi", price: 2480 },
@@ -35,11 +54,6 @@ const marketData = [
     { crop: "Onion", market: "Amritsar Mandi", price: 2700 },
     { crop: "Onion", market: "Hisar Mandi", price: 2900 },
 
-    { crop: "Bajra", market: "Bathinda Mandi", price: 2300 },
-    { crop: "Bajra", market: "Rohtak Mandi", price: 2400 },
-
-    { crop: "Barley", market: "Patiala Mandi", price: 2100 },
-    { crop: "Barley", market: "Karnal Mandi", price: 2200 }
 ];
 
 const mandiList = [
@@ -150,10 +164,10 @@ function MarketPrice() {
                         <div className="price-card">
 
                         <img
-                        src={cropsImage}
-                        alt="Crops"
-                        className="price-image"
-                    />
+                            src={cropImages[selectedCrop]}
+                            alt={selectedCrop}
+                            className="price-image"
+                        />
 
                     <div className="price-content">
 
