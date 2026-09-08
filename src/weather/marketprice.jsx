@@ -56,24 +56,7 @@ const marketData = [
 
 ];
 
-const mandiList = [
-    "Amritsar Mandi",
-    "Ludhiana Mandi",
-    "Patiala Mandi",
-    "Jalandhar Mandi",
-    "Khanna Mandi",
-    "Bathinda Mandi",
-    "Moga Mandi",
-    "Fazilka Mandi",
-    "Hisar Mandi",
-    "Sirsa Mandi",
-    "Karnal Mandi",
-    "Panipat Mandi",
-    "Sonipat Mandi",
-    "Rohtak Mandi",
-    "Ambala Mandi",
-    "Kaithal Mandi"
-];
+
 
 function MarketPrice() {
 
@@ -81,6 +64,10 @@ function MarketPrice() {
     const [selectedMarket, setSelectedMarket] = useState("");
 
     const crops = [...new Set(marketData.map(item => item.crop))];
+
+    const availableMandis = marketData
+    .filter(item => item.crop === selectedCrop)
+    .map(item => item.market);
 
     const selectedData = marketData.find(
         item =>
@@ -115,7 +102,10 @@ function MarketPrice() {
 
                     <select
                         value={selectedCrop}
-                        onChange={(e) => setSelectedCrop(e.target.value)}
+                        onChange={(e) => {
+                            setSelectedCrop(e.target.value);
+                            setSelectedMarket("");
+                        }}
                     >
                         <option value="">
                             Choose a crop
@@ -143,7 +133,7 @@ function MarketPrice() {
                             Choose a mandi
                         </option>
 
-                        {mandiList.map((mandi) => (
+                        {availableMandis.map((mandi) => (
                             <option key={mandi} value={mandi}>
                                 {mandi}
                             </option>

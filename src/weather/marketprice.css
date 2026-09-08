@@ -50,6 +50,7 @@
     gap: 25px;
 
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid #2e7d32;
 }
 
 .select-group {
@@ -85,6 +86,10 @@
     box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
 }
 
+.select-group select:hover {
+    border-color: #81c784;
+}
+
 
 /* PRICE SECTION */
 
@@ -116,6 +121,7 @@
     height: 280px;
     object-fit: cover;
     border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .price-heading {
@@ -141,7 +147,7 @@
 .price-info {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 12px;
 
     padding-top: 18px;
     border-top: 1px solid #eee;
@@ -149,7 +155,14 @@
     color: #444;
     font-size: 15px;
 
-    grid-column: 2;
+    grid-column: 1;
+}
+
+.price-info span {
+    background-color: #f4f9f1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 500;
 }
 
 
@@ -212,28 +225,49 @@
 @media (max-width: 700px) {
 
     .market-page {
-        padding: 45px 5%;
+        padding: 40px 5%;
     }
 
     .market-hero h1 {
         font-size: 34px;
     }
 
+    .market-hero p {
+        font-size: 15px;
+    }
+
     .market-box {
         grid-template-columns: 1fr;
         padding: 22px;
+        gap: 18px;
+        border-top: 5px solid #2e7d32;
     }
 
-    .price-info {
-        flex-direction: column;
-        gap: 10px;
+    .price-section {
+        margin-top: 25px;
     }
 
     .price-card {
         grid-template-columns: 1fr;
+        padding: 22px;
+        gap: 20px;
+    }
+
+    .price-image {
+        height: 220px;
+    }
+
+    .price-card h2 {
+        font-size: 36px;
     }
 
     .price-info {
         grid-column: 1;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .price-info span {
+        text-align: center;
     }
 }
