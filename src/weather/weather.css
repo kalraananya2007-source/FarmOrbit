@@ -45,6 +45,7 @@
     background-color: white;
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid #2e7d32;
     text-align: center;
 }
 
@@ -65,7 +66,7 @@
 }
 
 .temperature {
-    font-size: 45px;
+    font-size: 52px;
     font-weight: bold;
     color: #1b5e20;
 }
@@ -101,34 +102,37 @@
 
 /* Forecast Cards Container */
 .forecast-list {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 /* Individual Forecast Card */
 .forecast-card {
     background-color: white;
-    padding: 25px 20px;
-    border-radius: 14px;
+    padding: 28px 20px;
+    border-radius: 16px;
+    width: 150px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid #81c784;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Hover Effect */
 .forecast-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 }
 
 /* Day */
 .forecast-day {
-    color: #2e7d32;
-    font-size: 20px;
+    color: #1b5e20;
+    font-size: 22px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin: 0;
 }
 
 /* Temperature */
@@ -136,6 +140,7 @@
     color: #444;
     font-size: 22px;
     font-weight: bold;
+    margin-top: 12px;
 }
 
 /* Tablet */
@@ -150,22 +155,66 @@
     }
 
     .forecast-list {
-        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        gap: 20px
     }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
 
+    .weather-page {
+        padding: 30px 5%;
+    }
+
     .weather-page h1 {
         font-size: 30px;
     }
 
+    .location-selectors {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .location-selectors select {
+        width: 100%;
+    }
+
+    .weather-card {
+        padding: 22px;
+    }
+
     .weather-main {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .temperature {
+        font-size: 42px;
+    }
+
+    .weather-details {
+        gap: 12px;
     }
 
     .forecast-list {
-        grid-template-columns: 1fr;
+        justify-content: center;
+        gap: 15px;
     }
+
+    .forecast-card {
+        padding: 22px 15px;
+    }
+}
+
+
+.forecast-empty {
+    grid-column: 1 / -1;
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }

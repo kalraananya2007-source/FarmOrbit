@@ -41,11 +41,9 @@ const weatherData = {
         windSpeed: 14,
         rainChance: 30,
         forecast: [
+            { day: "Yesterday", temp: 29 },
             { day: "Today", temp: 31 },
-            { day: "Tomorrow", temp: 32 },
-            { day: "Day 3", temp: 29 },
-            { day: "Day 4", temp: 28 },
-            { day: "Day 5", temp: 30 }
+            { day: "Tomorrow", temp: 32 }
         ]
     },
 
@@ -56,11 +54,9 @@ const weatherData = {
         windSpeed: 12,
         rainChance: 20,
         forecast: [
-            { day: "Today", temp: 30 },
-            { day: "Tomorrow", temp: 31 },
-            { day: "Day 3", temp: 30 },
-            { day: "Day 4", temp: 28 },
-            { day: "Day 5", temp: 29 }
+            { day: "Yesterday", temp: 30 },
+            { day: "Today", temp: 32 },
+            { day: "Tomorrow", temp: 31 }
         ]
     },
 
@@ -71,11 +67,9 @@ const weatherData = {
         windSpeed: 15,
         rainChance: 35,
         forecast: [
+            { day: "Yesterday", temp: 30},
             { day: "Today", temp: 32 },
-            { day: "Tomorrow", temp: 33 },
-            { day: "Day 3", temp: 31 },
-            { day: "Day 4", temp: 29 },
-            { day: "Day 5", temp: 30 }
+            { day: "Tomorrow", temp: 33 }
         ]
     },
 
@@ -86,11 +80,9 @@ const weatherData = {
         windSpeed: 13,
         rainChance: 28,
         forecast: [
+            { day: "Yesterday", temp: 33},
             { day: "Today", temp: 31 },
-            { day: "Tomorrow", temp: 32 },
-            { day: "Day 3", temp: 30 },
-            { day: "Day 4", temp: 29 },
-            { day: "Day 5", temp: 31 }
+            { day: "Tomorrow", temp: 32 }
         ]
     },
 
@@ -101,11 +93,9 @@ const weatherData = {
         windSpeed: 16,
         rainChance: 15,
         forecast: [
+            { day: "Yesterday", temp: 32},
             { day: "Today", temp: 34 },
-            { day: "Tomorrow", temp: 35 },
-            { day: "Day 3", temp: 33 },
-            { day: "Day 4", temp: 32 },
-            { day: "Day 5", temp: 34 }
+            { day: "Tomorrow", temp: 35 }
         ]
     },
 
@@ -116,11 +106,9 @@ const weatherData = {
         windSpeed: 14,
         rainChance: 30,
         forecast: [
+            { day: "Yesterday", temp: 30},
             { day: "Today", temp: 32 },
-            { day: "Tomorrow", temp: 33 },
-            { day: "Day 3", temp: 31 },
-            { day: "Day 4", temp: 30 },
-            { day: "Day 5", temp: 31 }
+            { day: "Tomorrow", temp: 33 }
         ]
     },
 
@@ -131,11 +119,9 @@ const weatherData = {
         windSpeed: 15,
         rainChance: 18,
         forecast: [
+            { day: "Yesterday", temp: 31},
             { day: "Today", temp: 33 },
-            { day: "Tomorrow", temp: 34 },
-            { day: "Day 3", temp: 32 },
-            { day: "Day 4", temp: 31 },
-            { day: "Day 5", temp: 33 }
+            { day: "Tomorrow", temp: 34 }
         ]
     },
 
@@ -146,11 +132,9 @@ const weatherData = {
         windSpeed: 13,
         rainChance: 25,
         forecast: [
+            { day: "Yesterday", temp: 30},
             { day: "Today", temp: 32 },
             { day: "Tomorrow", temp: 33 },
-            { day: "Day 3", temp: 31 },
-            { day: "Day 4", temp: 30 },
-            { day: "Day 5", temp: 32 }
         ]
     },
 
@@ -161,11 +145,9 @@ const weatherData = {
     windSpeed: 10,
     rainChance: 40,
     forecast: [
+        { day: "Yesterday", temp: 24},
         { day: "Today", temp: 22 },
-        { day: "Tomorrow", temp: 23 },
-        { day: "Day 3", temp: 21 },
-        { day: "Day 4", temp: 20 },
-        { day: "Day 5", temp: 22 }
+        { day: "Tomorrow", temp: 23 }
     ]
 },
 
@@ -176,11 +158,9 @@ Manali: {
     windSpeed: 9,
     rainChance: 45,
     forecast: [
+        { day: "Yesterday", temp: 15},
         { day: "Today", temp: 18 },
-        { day: "Tomorrow", temp: 19 },
-        { day: "Day 3", temp: 17 },
-        { day: "Day 4", temp: 16 },
-        { day: "Day 5", temp: 18 }
+        { day: "Tomorrow", temp: 19 }
     ]
 },
 
@@ -191,11 +171,9 @@ Kangra: {
     windSpeed: 11,
     rainChance: 35,
     forecast: [
+        { day: "Yesterday", temp: 23},
         { day: "Today", temp: 25 },
-        { day: "Tomorrow", temp: 26 },
-        { day: "Day 3", temp: 24 },
-        { day: "Day 4", temp: 23 },
-        { day: "Day 5", temp: 25 }
+        { day: "Tomorrow", temp: 26 }
     ]
 },
 
@@ -206,11 +184,9 @@ Solan: {
     windSpeed: 10,
     rainChance: 30,
     forecast: [
+        { day: "Yesterday", temp: 22},
         { day: "Today", temp: 24 },
-        { day: "Tomorrow", temp: 25 },
-        { day: "Day 3", temp: 23 },
-        { day: "Day 4", temp: 22 },
-        { day: "Day 5", temp: 24 }
+        { day: "Tomorrow", temp: 25 }
     ]
 },
 
@@ -221,11 +197,9 @@ Jaipur: {
     windSpeed: 18,
     rainChance: 10,
     forecast: [
+        { day: "Yesterday", temp: 33},
         { day: "Today", temp: 35 },
-        { day: "Tomorrow", temp: 36 },
-        { day: "Day 3", temp: 34 },
-        { day: "Day 4", temp: 33 },
-        { day: "Day 5", temp: 35 }
+        { day: "Tomorrow", temp: 36 }
     ]
 },
 
@@ -236,11 +210,9 @@ Jodhpur: {
     windSpeed: 20,
     rainChance: 8,
     forecast: [
-        { day: "Today", temp: 37 },
-        { day: "Tomorrow", temp: 38 },
-        { day: "Day 3", temp: 36 },
-        { day: "Day 4", temp: 35 },
-        { day: "Day 5", temp: 37 }
+        { day: "Yesterday", temp: 37 },
+        { day: "Today", temp: 36 },
+        { day: "Tomorrow", temp: 38 }
     ]
 },
 
@@ -251,11 +223,10 @@ Udaipur: {
     windSpeed: 13,
     rainChance: 20,
     forecast: [
+        { day: "Yesterday", temp: 30 },
         { day: "Today", temp: 31 },
-        { day: "Tomorrow", temp: 32 },
-        { day: "Day 3", temp: 30 },
-        { day: "Day 4", temp: 29 },
-        { day: "Day 5", temp: 31 }
+        { day: "Tomorrow", temp: 32 }
+        
     ]
 },
 
@@ -266,11 +237,9 @@ Kota: {
     windSpeed: 15,
     rainChance: 25,
     forecast: [
+        { day: "Yesterday", temp: 32},
         { day: "Today", temp: 34 },
-        { day: "Tomorrow", temp: 35 },
-        { day: "Day 3", temp: 33 },
-        { day: "Day 4", temp: 32 },
-        { day: "Day 5", temp: 34 }
+        { day: "Tomorrow", temp: 35 }
     ]
 },    
 
