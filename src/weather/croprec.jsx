@@ -1,9 +1,19 @@
 import React from "react";
 import "./croprec.css";
 
+import wheatImage from "../assets/wheat.png";
+import cottonImage from "../assets/cotton.png";
+import maizeImage from "../assets/maize.png";
+import mustardImage from "../assets/mustard.png";
+import onionImage from "../assets/onion.png";
+import potatoImage from "../assets/potato.png";
+import riceImage from "../assets/rice.png";
+import tomatoImage from "../assets/tomato.png";
+
 const cropData = [
     {
         name: "Wheat",
+        image: wheatImage,
         season: "Rabi",
         soil: "Loamy Soil",
         water: "Moderate",
@@ -11,6 +21,7 @@ const cropData = [
     },
     {
         name: "Rice",
+        image: riceImage,
         season: "Kharif",
         soil: "Clayey Soil",
         water: "High",
@@ -18,6 +29,7 @@ const cropData = [
     },
     {
         name: "Maize",
+        image: maizeImage,
         season: "Kharif",
         soil: "Well-drained Soil",
         water: "Moderate",
@@ -25,16 +37,55 @@ const cropData = [
     },
     {
         name: "Cotton",
+        image: cottonImage,
         season: "Kharif",
         soil: "Black Soil",
         water: "Moderate",
         duration: "160-180 days"
+    },
+    {
+        name: "Mustard",
+        image: mustardImage,
+        season: "Rabi",
+        soil: "Loamy Soil",
+        water: "Low",
+        duration: "110-140 days"
+    },
+    {
+        name: "Onion",
+        image: onionImage,
+        season: "Rabi/Kharif",
+        soil: "Loamy Soil",
+        water: "Moderate",
+        duration: "100-150 days"
+    },
+    {
+        name: "Potato",
+        image: potatoImage,
+        season: "Rabi",
+        soil: "Sandy Loam",
+        water: "Moderate",
+        duration: "90-120 days"
+    },
+    {
+        name: "Tomato",
+        image: tomatoImage,
+        season: "Kharif/Rabi",
+        soil: "Loamy Soil",
+        water: "Moderate",
+        duration: "90-120 days"
     }
 ];
 
-function CropCard({ name, season, soil, water, duration }) {
+function CropCard({ name, image, season, soil, water, duration }) {
     return (
         <div className="crop-card">
+            <img
+                src={image}
+                alt={name}
+                className="crop-image"
+            />
+
             <h2>{name}</h2>
 
             <p>
@@ -72,6 +123,7 @@ function CropRec() {
                     <CropCard
                         key={crop.name}
                         name={crop.name}
+                        image={crop.image}
                         season={crop.season}
                         soil={crop.soil}
                         water={crop.water}

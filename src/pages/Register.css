@@ -1,0 +1,210 @@
+
+/* FarmOrbit - Register Page Styles */
+ 
+* {
+  box-sizing: border-box;
+}
+ 
+.register-page {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: #eef6ee;
+}
+ 
+/* ---------- LEFT PANEL ---------- */
+.register-left {
+  flex: 1;
+  background: linear-gradient(160deg, #1f4d1f 0%, #2f6b2f 55%, #3f8a3f 100%);
+  color: #ffffff;
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+ 
+.farmorbit-logo {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+}
+ 
+.register-content h1 {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+ 
+.register-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e3f2e3;
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+ 
+.register-features {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+ 
+.register-features div {
+  font-size: 16px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 12px 18px;
+  border-radius: 10px;
+  width: fit-content;
+}
+ 
+/* ---------- RIGHT PANEL ---------- */
+.register-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #ffffff;
+}
+ 
+.register-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 20px 10px;
+}
+ 
+.register-card h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1f4d1f;
+  text-align: center;
+  margin-bottom: 6px;
+}
+ 
+.register-subtitle {
+  text-align: center;
+  color: #6b7d6b;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+ 
+/* ---------- FORM ---------- */
+.input-group {
+  margin-bottom: 20px;
+}
+ 
+.input-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1f2d1f;
+  margin-bottom: 8px;
+}
+ 
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #cfe0cf;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #333;
+  background-color: #fafffa;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.input-group input::placeholder {
+  color: #a8b8a8;
+}
+ 
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #3f8a3f;
+  box-shadow: 0 0 0 3px rgba(63, 138, 63, 0.15);
+}
+ 
+.input-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232f6b2f' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+ 
+/* ---------- BUTTON ---------- */
+.register-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background-color: #2f6b2f;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+ 
+.register-btn:hover {
+  background-color: #1f4d1f;
+}
+ 
+.register-btn:active {
+  transform: scale(0.98);
+}
+ 
+/* ---------- LOGIN LINK ---------- */
+.login-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 14px;
+  color: #6b7d6b;
+}
+ 
+.login-text span {
+  color: #2f6b2f;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 4px;
+}
+ 
+.login-text span:hover {
+  text-decoration: underline;
+}
+ 
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .register-page {
+    flex-direction: column;
+  }
+ 
+  .register-left {
+    padding: 40px 30px;
+    text-align: center;
+    align-items: center;
+  }
+ 
+  .register-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  .register-features {
+    align-items: center;
+  }
+ 
+  .farmorbit-logo {
+    position: static;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}

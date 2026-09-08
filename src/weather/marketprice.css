@@ -1,0 +1,273 @@
+.market-page {
+    min-height: 650px;
+    padding: 60px 8%;
+    background: linear-gradient(
+        180deg,
+        #f4f9f1 0%,
+        #ffffff 100%
+    );
+}
+
+
+/* HERO */
+
+.market-hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.market-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.market-hero h1 {
+    color: #1b5e20;
+    font-size: 42px;
+    margin: 0 0 12px;
+}
+
+.market-hero p {
+    color: #666;
+    font-size: 17px;
+    margin: 0 auto;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+
+/* SELECT BOX */
+
+.market-box {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 18px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid #2e7d32;
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.select-group label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.select-group select {
+    width: 100%;
+    padding: 14px 15px;
+
+    font-size: 16px;
+
+    border: 1px solid #c8d8c5;
+    border-radius: 10px;
+
+    background-color: #fafdf9;
+    color: #333;
+
+    cursor: pointer;
+}
+
+.select-group select:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.select-group select:hover {
+    border-color: #81c784;
+}
+
+
+/* PRICE SECTION */
+
+.price-section {
+    max-width: 850px;
+    margin: 35px auto 0;
+}
+
+
+/* PRICE CARD */
+
+.price-card {
+    background-color: white;
+    border-radius: 18px;
+    padding: 35px;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 35px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    border-top: 5px solid #2e7d32;
+}
+
+.price-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.price-heading {
+    color: #666;
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+}
+
+.price-card h2 {
+    color: #1b5e20;
+    font-size: 42px;
+    margin: 10px 0 0;
+    text-align: center;
+}
+
+.price-unit {
+    color: #777;
+    margin: 3px 0 20px;
+    text-align: center;
+}
+
+.price-info {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    padding-top: 18px;
+    border-top: 1px solid #eee;
+
+    color: #444;
+    font-size: 15px;
+
+    grid-column: 1;
+}
+
+.price-info span {
+    background-color: #f4f9f1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+
+/* EMPTY CARD */
+
+.empty-card {
+    background-color: white;
+    border-radius: 18px;
+    padding: 45px 30px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.empty-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.empty-card h3 {
+    color: #2e7d32;
+    font-size: 24px;
+    margin: 8px 0;
+}
+
+.empty-card p {
+    color: #777;
+    margin: 0;
+}
+
+
+/* NOT FOUND */
+
+.not-found {
+    background-color: white;
+    border-radius: 18px;
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.not-found div {
+    font-size: 40px;
+}
+
+.not-found h3 {
+    color: #555;
+    margin: 10px 0;
+}
+
+.not-found p {
+    color: #888;
+}
+
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+    .market-page {
+        padding: 40px 5%;
+    }
+
+    .market-hero h1 {
+        font-size: 34px;
+    }
+
+    .market-hero p {
+        font-size: 15px;
+    }
+
+    .market-box {
+        grid-template-columns: 1fr;
+        padding: 22px;
+        gap: 18px;
+        border-top: 5px solid #2e7d32;
+    }
+
+    .price-section {
+        margin-top: 25px;
+    }
+
+    .price-card {
+        grid-template-columns: 1fr;
+        padding: 22px;
+        gap: 20px;
+    }
+
+    .price-image {
+        height: 220px;
+    }
+
+    .price-card h2 {
+        font-size: 36px;
+    }
+
+    .price-info {
+        grid-column: 1;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .price-info span {
+        text-align: center;
+    }
+}
