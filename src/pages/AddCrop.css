@@ -1,0 +1,28 @@
+.add-crop {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+}
+
+.add-crop h1 {
+  margin-bottom: 20px;
+}
+
+.add-crop form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-crop input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-crop button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

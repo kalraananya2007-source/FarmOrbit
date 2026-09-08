@@ -15,6 +15,9 @@ import CropRecommendations from './weather/croprec';
 import MarketPrice from './weather/marketprice';
 import Register from './pages/Register';
 
+import AddCrop from './pages/AddCrop';
+import MyCrop from './pages/MyCrop';
+
 function App() {
   return (
     <>
@@ -40,36 +43,20 @@ function App() {
         />
 
         {/* Market Price */}
-        <Route
-          path="/market-price"
-          element={<MarketPrice />}
-        />
+        <Route path="/market-price" element={<MarketPrice />} />
 
-        {/* Login Page */}
+        {/* Login */}
         <Route path="/login" element={<Login />} />
-        {/* Marketplace - Coming Soon */}
-        <Route
-          path="/marketplace"
-          element={
-            <ComingSoon
-              title="Marketplace"
-              message="Marketplace feature is coming soon."
-            />
-          }
-        />
 
+        {/* Register */}
         <Route path="/register" element={<Register />} />
 
-        {/* Any wrong URL */}
-        <Route
-          path="*"
-          element={
-            <ComingSoon
-              title="Page Not Found"
-              message="The page you are looking for does not exist."
-            />
-          }
-        />
+        {/* Crop Management */}
+        <Route path="/add-crop" element={<AddCrop />} />
+        <Route path="/my-crops" element={<MyCrop />} />
+
+        {/* Coming Soon */}
+        <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>
 
       <Footer />

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-
 import './Navbar.css';
 
 function Navbar() {
@@ -14,9 +13,9 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
 
-        <div className="navbar-logo">
+        <Link to="/" className="navbar-logo">
           🌱 FarmOrbit
-        </div>
+        </Link>
 
         <div className="menu-icon" onClick={toggleMenu}>
           {menuOpen ? '✕' : '☰'}
@@ -54,8 +53,13 @@ function Navbar() {
             </NavLink>
           </li>
 
-          <li className="navbar-buttons">
+          <li>
+            <Link to="/my-crops" onClick={() => setMenuOpen(false)}>
+              My Crops
+            </Link>
+          </li>
 
+          <li className="navbar-buttons">
             <Link to="/login" onClick={() => setMenuOpen(false)}>
               <button className="btn btn-outline">
                 Login
@@ -67,7 +71,6 @@ function Navbar() {
                 Register
               </button>
             </Link>
-
           </li>
 
         </ul>
