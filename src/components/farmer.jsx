@@ -1,6 +1,7 @@
 import FarmerNavbar from "./farmerNavbar";
 
 import "./farmer.css";
+import { Link } from 'react-router-dom';
 
 function Farmer() {
 
@@ -47,9 +48,12 @@ function Farmer() {
       <section className="farmer-recent-crops">
 
         <div className="recent-crops-header">
-          <h2>Recent Crops</h2>
-          <button className="add-crop-btn">+ Add Crop</button>
-        </div>
+  <h2>Recent Crops</h2>
+
+  <Link to="/add-crop" className="add-crop-btn">
+    + Add Crop
+  </Link>
+</div>
 
         <div className="crop-list">
 
