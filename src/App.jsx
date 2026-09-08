@@ -51,17 +51,13 @@ function App() {
         {/* Register */}
         <Route path="/register" element={<Register />} />
 
-        {/* Add Crop */}
+        {/* Crop Management */}
         <Route path="/add-crop" element={<AddCrop />} />
-
-        {/* My Crops */}
         <Route path="/my-crops" element={<MyCrop />} />
 
         {/* Coming Soon */}
         <Route path="/coming-soon" element={<ComingSoon />} />
       </Routes>
-
-      <Weather />
 
       <Footer />
     </>
