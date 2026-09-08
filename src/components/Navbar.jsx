@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import './Navbar.css';
 
@@ -37,21 +37,21 @@ function Navbar() {
           </li>
 
           <li>
-            <Link to="/weather" onClick={() => setMenuOpen(false)}>
+            <NavLink to="/weather" onClick={() => setMenuOpen(false)}>
               Weather
-            </Link>
+            </NavLink>
           </li>
 
           <li>
-            <Link to="/market-price" onClick={() => setMenuOpen(false)}>
+            <NavLink to="/market-price" onClick={() => setMenuOpen(false)}>
               Market Price
-            </Link>
+            </NavLink>
           </li>
 
           <li>
-            <Link to="/marketplace" onClick={() => setMenuOpen(false)}>
-              Marketplace
-            </Link>
+            <NavLink to="/crop-recommendation" onClick={() => setMenuOpen(false)}>
+              Crop Information
+            </NavLink>
           </li>
 
           <li className="navbar-buttons">
