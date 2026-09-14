@@ -19,6 +19,7 @@ function AddCrop() {
     const savedCrops = JSON.parse(localStorage.getItem('crops')) || [];
 
     const newCrop = {
+      id: Date.now(),
       name: cropName,
       type: cropType,
       location: fieldLocation,
