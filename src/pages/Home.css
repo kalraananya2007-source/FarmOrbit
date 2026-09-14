@@ -42,17 +42,26 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
-
 .feature-card {
   background-color: #ffffff;
   border: 1px solid #e0e6de;
   border-radius: 10px;
   padding: 26px 20px;
   text-align: center;
+
+  /* For React Router Link */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  /* Smooth hover effect */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .feature-card:hover {
   border-color: #81c784;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .feature-icon {

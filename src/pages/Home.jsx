@@ -1,5 +1,5 @@
-
 import './Home.css';
+import { Link } from 'react-router-dom';
 
 import cropImg from '../assets/crop.jpg';
 import marketplaceImg from '../assets/marketplace.jpg';
@@ -12,24 +12,28 @@ const features = [
     image: cropImg,
     title: 'Crop Management',
     desc: 'Farmers can track their crops, sowing dates and expected harvest time.',
+    link: '/crop-recommendation',
   },
 
   {
     image: marketplaceImg,
     title: 'Marketplace',
     desc: 'Connect directly with buyers and sell produce at fair prices.',
+    link: '/market-price',
   },
 
   {
     image: weatherImg,
     title: 'Weather Updates',
     desc: 'Get simple weather information to plan farming activities better.',
+    link: '/weather',
   },
 
   {
     image: communityImg,
     title: 'Farmer Community',
     desc: 'A space for farmers to ask questions and share their experience.',
+    link: '/farmer',
   },
 ];
 
@@ -66,20 +70,12 @@ function Home({ onFarmerClick }) {
         </p>
 
         <div className="feature-grid">
+
           {features.map((item) => (
-            <div
+            <Link
+              to={item.link}
               className="feature-card"
               key={item.title}
-              onClick={
-                item.title === 'Crop Management'
-                  ? onFarmerClick
-                  : undefined
-              }
-              style={
-                item.title === 'Crop Management'
-                  ? { cursor: 'pointer' }
-                  : {}
-              }
             >
               <div className="feature-image">
                 <img src={item.image} alt={item.title} />
@@ -87,8 +83,9 @@ function Home({ onFarmerClick }) {
 
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
-            </div>
+            </Link>
           ))}
+
         </div>
       </section>
 
@@ -125,4 +122,3 @@ function Home({ onFarmerClick }) {
 }
 
 export default Home;
-
