@@ -7,7 +7,7 @@ function AddCrop() {
   const [fieldLocation, setFieldLocation] = useState('');
   const [plantingDate, setPlantingDate] = useState('');
   const [error, setError] = useState('');
-  const [crops, setCrops] = useState([]);
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -16,19 +16,21 @@ function AddCrop() {
       return;
     }
 
+    const savedCrops = JSON.parse(localStorage.getItem('crops')) || [];
+
     const newCrop = {
-  name: cropName,
-  type: cropType,
-  location: fieldLocation,
-  plantingDate: plantingDate
-};
+      name: cropName,
+      type: cropType,
+      location: fieldLocation,
+      plantingDate: plantingDate
+    };
 
-const updatedCrops = [...crops, newCrop];
+    const updatedCrops = [...savedCrops, newCrop];
 
-setCrops(updatedCrops);
-localStorage.setItem('crops', JSON.stringify(updatedCrops));
+    localStorage.setItem('crops', JSON.stringify(updatedCrops));
 
-console.log('New Crop:', newCrop);
+    console.log('New Crop:', newCrop);
+
     setError('');
     alert('Crop added successfully!');
 
@@ -44,6 +46,7 @@ console.log('New Crop:', newCrop);
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="cropName">Crop Name</label>
+
         <input
           id="cropName"
           name="cropName"
@@ -54,6 +57,7 @@ console.log('New Crop:', newCrop);
         />
 
         <label htmlFor="cropType">Crop Type</label>
+
         <input
           id="cropType"
           name="cropType"
@@ -64,6 +68,7 @@ console.log('New Crop:', newCrop);
         />
 
         <label htmlFor="fieldLocation">Field Location</label>
+
         <input
           id="fieldLocation"
           name="fieldLocation"
@@ -74,6 +79,7 @@ console.log('New Crop:', newCrop);
         />
 
         <label htmlFor="plantingDate">Planting Date</label>
+
         <input
           id="plantingDate"
           name="plantingDate"
