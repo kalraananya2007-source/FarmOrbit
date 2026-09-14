@@ -9,6 +9,10 @@ function MyCrops() {
     setCrops(savedCrops);
   }, []);
 
+  function editCrop(crop) {
+    console.log('Edit Crop:', crop);
+  }
+
   function deleteCrop(index) {
     const confirmed = window.confirm(
       'Are you sure you want to delete this crop?'
@@ -51,6 +55,10 @@ function MyCrops() {
               <p>
                 <strong>Planting Date:</strong> {crop.plantingDate}
               </p>
+
+              <button onClick={() => editCrop(crop)}>
+                Edit Crop
+              </button>
 
               <button onClick={() => deleteCrop(crops.indexOf(crop))}>
                 Delete Crop
