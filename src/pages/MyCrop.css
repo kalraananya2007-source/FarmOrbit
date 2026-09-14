@@ -1,31 +1,148 @@
 .my-crops {
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 40px;
 }
 
 .my-crops h1 {
+  color: #1b5e20;
+  margin-bottom: 10px;
+}
+
+.my-crops > p {
+  color: #666;
   margin-bottom: 25px;
 }
 
+/* Crop List */
 .crop-list {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
+/* Crop Card */
 .crop-card {
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #dcedc8;
   background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
 }
 
 .crop-card h2 {
-  margin-bottom: 12px;
+  color: #1b5e20;
+  margin-bottom: 16px;
 }
 
 .crop-card p {
-  margin: 8px 0;
+  margin: 10px 0;
+  color: #555;
 }
 
+/* Buttons */
+.crop-card button {
+  padding: 10px 16px;
+  margin-top: 15px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Edit / Update Button */
+.crop-card button:first-of-type {
+  background-color: #2e7d32;
+  color: white;
+}
+
+.crop-card button:first-of-type:hover {
+  background-color: #256428;
+}
+
+/* Delete / Cancel Button */
+.crop-card button:last-of-type {
+  background-color: #eeeeee;
+  color: #333;
+}
+
+.crop-card button:last-of-type:hover {
+  background-color: #dddddd;
+}
+
+/* Edit Form */
+.my-crops .crop-card:has(input) {
+  grid-column: 1 / -1;
+  max-width: 650px;
+  margin: 0 auto 25px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.my-crops .crop-card:has(input) h2 {
+  font-size: 1.5rem;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.my-crops .crop-card:has(input) label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  color: #333;
+  font-weight: 500;
+}
+
+.my-crops .crop-card:has(input) input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+.my-crops .crop-card:has(input) input:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+}
+
+/* Edit Form Buttons */
+.my-crops .crop-card:has(input) button {
+  margin-top: 22px;
+}
+
+.my-crops .crop-card:has(input) button:first-of-type {
+  background-color: #2e7d32;
+  color: white;
+}
+
+.my-crops .crop-card:has(input) button:last-of-type {
+  background-color: #eeeeee;
+  color: #333;
+}
+
+/* Empty State */
 .no-crops {
   margin-top: 20px;
+  color: #777;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .my-crops {
+    padding: 25px 15px;
+  }
+
+  .crop-list {
+    grid-template-columns: 1fr;
+  }
+
+  .my-crops .crop-card:has(input) {
+    max-width: 100%;
+  }
 }
