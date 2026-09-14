@@ -13,6 +13,14 @@ function Farmer() {
 
   const totalCrops = crops.length;
 
+  const activeCrops = crops.filter(
+    (crop) => crop.status !== "Harvested"
+  ).length;
+
+  const harvestedCrops = crops.filter(
+    (crop) => crop.status === "Harvested"
+  ).length;
+
   const recentCrops = crops.slice(-3).reverse();
 
   return (
@@ -31,12 +39,12 @@ function Farmer() {
         </div>
 
         <div className="stat-card">
-          <h2>{crops.length}</h2>
+          <h2>{activeCrops}</h2>
           <p>Active Crops</p>
         </div>
 
         <div className="stat-card">
-          <h2>0</h2>
+          <h2>{harvestedCrops}</h2>
           <p>Harvested Crops</p>
         </div>
       </section>
@@ -58,8 +66,14 @@ function Farmer() {
               <div className="crop-card" key={crop.id}>
                 <span className="crop-name">{crop.name}</span>
 
-                <span className="crop-status growing">
-                  {crop.type}
+                <span
+                  className={`crop-status ${
+                    crop.status === "Harvested"
+                      ? "harvested"
+                      : "growing"
+                  }`}
+                >
+                  {crop.status || "Growing"}
                 </span>
               </div>
             ))}

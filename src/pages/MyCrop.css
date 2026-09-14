@@ -96,6 +96,7 @@
   font-weight: 500;
 }
 
+/* Text and Date Inputs */
 .my-crops .crop-card:has(input) input {
   width: 100%;
   box-sizing: border-box;
@@ -104,6 +105,7 @@
   border-radius: 6px;
   font-size: 14px;
   outline: none;
+  background-color: #fff;
 }
 
 .my-crops .crop-card:has(input) input:focus {
@@ -111,19 +113,56 @@
   box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
 }
 
+/* Status Dropdown */
+.my-crops .crop-card select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  appearance: auto;
+}
+
+.my-crops .crop-card select:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+}
+
+/* Error */
+.error-message {
+  color: #d32f2f !important;
+  font-size: 14px;
+  margin-top: 10px !important;
+}
+
 /* Edit Form Buttons */
 .my-crops .crop-card:has(input) button {
   margin-top: 22px;
 }
 
+/* Update */
 .my-crops .crop-card:has(input) button:first-of-type {
   background-color: #2e7d32;
   color: white;
 }
 
+.my-crops .crop-card:has(input) button:first-of-type:hover {
+  background-color: #256428;
+}
+
+/* Cancel */
 .my-crops .crop-card:has(input) button:last-of-type {
   background-color: #eeeeee;
   color: #333;
+}
+
+.my-crops .crop-card:has(input) button:last-of-type:hover {
+  background-color: #dddddd;
 }
 
 /* Empty State */

@@ -10,6 +10,7 @@ function MyCrops() {
   const [cropType, setCropType] = useState('');
   const [fieldLocation, setFieldLocation] = useState('');
   const [plantingDate, setPlantingDate] = useState('');
+  const [status, setStatus] = useState('Growing');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function MyCrops() {
     setCropType(crop.type);
     setFieldLocation(crop.location);
     setPlantingDate(crop.plantingDate);
+    setStatus(crop.status || 'Growing');
     setError('');
   }
 
@@ -34,6 +36,7 @@ function MyCrops() {
     setCropType('');
     setFieldLocation('');
     setPlantingDate('');
+    setStatus('Growing');
     setError('');
   }
 
@@ -52,7 +55,8 @@ function MyCrops() {
           name: cropName,
           type: cropType,
           location: fieldLocation,
-          plantingDate: plantingDate
+          plantingDate: plantingDate,
+          status: status
         };
       }
 
@@ -127,11 +131,19 @@ function MyCrops() {
               onChange={(e) => setPlantingDate(e.target.value)}
             />
 
+            <label htmlFor="editStatus">Crop Status</label>
+            <select
+              id="editStatus"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="Growing">Growing</option>
+              <option value="Harvested">Harvested</option>
+            </select>
+
             {error && <p className="error-message">{error}</p>}
 
-            <button type="submit">
-              Update Crop
-            </button>
+            <button type="submit">Update Crop</button>
 
             <button type="button" onClick={cancelEdit}>
               Cancel
@@ -158,6 +170,10 @@ function MyCrops() {
 
               <p>
                 <strong>Planting Date:</strong> {crop.plantingDate}
+              </p>
+
+              <p>
+                <strong>Status:</strong> {crop.status || 'Growing'}
               </p>
 
               <button onClick={() => editCrop(crop)}>

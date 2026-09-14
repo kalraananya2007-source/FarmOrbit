@@ -6,6 +6,7 @@ function AddCrop() {
   const [cropType, setCropType] = useState('');
   const [fieldLocation, setFieldLocation] = useState('');
   const [plantingDate, setPlantingDate] = useState('');
+  const [status, setStatus] = useState('Growing');
   const [error, setError] = useState('');
 
   function handleSubmit(e) {
@@ -23,22 +24,23 @@ function AddCrop() {
       name: cropName,
       type: cropType,
       location: fieldLocation,
-      plantingDate: plantingDate
+      plantingDate: plantingDate,
+      status: status
     };
 
     const updatedCrops = [...savedCrops, newCrop];
 
     localStorage.setItem('crops', JSON.stringify(updatedCrops));
 
-    console.log('New Crop:', newCrop);
-
     setError('');
+
     alert('Crop added successfully!');
 
     setCropName('');
     setCropType('');
     setFieldLocation('');
     setPlantingDate('');
+    setStatus('Growing');
   }
 
   return (
@@ -47,7 +49,6 @@ function AddCrop() {
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="cropName">Crop Name</label>
-
         <input
           id="cropName"
           name="cropName"
@@ -58,7 +59,6 @@ function AddCrop() {
         />
 
         <label htmlFor="cropType">Crop Type</label>
-
         <input
           id="cropType"
           name="cropType"
@@ -69,7 +69,6 @@ function AddCrop() {
         />
 
         <label htmlFor="fieldLocation">Field Location</label>
-
         <input
           id="fieldLocation"
           name="fieldLocation"
@@ -80,7 +79,6 @@ function AddCrop() {
         />
 
         <label htmlFor="plantingDate">Planting Date</label>
-
         <input
           id="plantingDate"
           name="plantingDate"
@@ -89,6 +87,17 @@ function AddCrop() {
           onChange={(e) => setPlantingDate(e.target.value)}
           required
         />
+
+        <label htmlFor="status">Crop Status</label>
+        <select
+          id="status"
+          name="status"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+        >
+          <option value="Growing">Growing</option>
+          <option value="Harvested">Harvested</option>
+        </select>
 
         {error && <p className="error-message">{error}</p>}
 
