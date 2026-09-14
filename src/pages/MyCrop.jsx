@@ -10,6 +10,7 @@ function MyCrops() {
   const [cropType, setCropType] = useState('');
   const [fieldLocation, setFieldLocation] = useState('');
   const [plantingDate, setPlantingDate] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const savedCrops = JSON.parse(localStorage.getItem('crops')) || [];
@@ -23,6 +24,7 @@ function MyCrops() {
     setCropType(crop.type);
     setFieldLocation(crop.location);
     setPlantingDate(crop.plantingDate);
+    setError('');
   }
 
   function cancelEdit() {
@@ -32,6 +34,37 @@ function MyCrops() {
     setCropType('');
     setFieldLocation('');
     setPlantingDate('');
+    setError('');
+  }
+
+  function updateCrop(e) {
+    e.preventDefault();
+
+    if (!cropName || !cropType || !fieldLocation || !plantingDate) {
+      setError('Please fill all the fields.');
+      return;
+    }
+
+    const updatedCrops = crops.map((crop) => {
+      if (crop.id === editingCrop.id) {
+        return {
+          ...crop,
+          name: cropName,
+          type: cropType,
+          location: fieldLocation,
+          plantingDate: plantingDate
+        };
+      }
+
+      return crop;
+    });
+
+    setCrops(updatedCrops);
+    localStorage.setItem('crops', JSON.stringify(updatedCrops));
+
+    alert('Crop updated successfully!');
+
+    cancelEdit();
   }
 
   function deleteCrop(index) {
@@ -61,45 +94,49 @@ function MyCrops() {
         <div className="crop-card">
           <h2>Edit Crop</h2>
 
-          <label htmlFor="editCropName">Crop Name</label>
-          <input
-            id="editCropName"
-            type="text"
-            value={cropName}
-            onChange={(e) => setCropName(e.target.value)}
-          />
+          <form onSubmit={updateCrop}>
+            <label htmlFor="editCropName">Crop Name</label>
+            <input
+              id="editCropName"
+              type="text"
+              value={cropName}
+              onChange={(e) => setCropName(e.target.value)}
+            />
 
-          <label htmlFor="editCropType">Crop Type</label>
-          <input
-            id="editCropType"
-            type="text"
-            value={cropType}
-            onChange={(e) => setCropType(e.target.value)}
-          />
+            <label htmlFor="editCropType">Crop Type</label>
+            <input
+              id="editCropType"
+              type="text"
+              value={cropType}
+              onChange={(e) => setCropType(e.target.value)}
+            />
 
-          <label htmlFor="editFieldLocation">Field Location</label>
-          <input
-            id="editFieldLocation"
-            type="text"
-            value={fieldLocation}
-            onChange={(e) => setFieldLocation(e.target.value)}
-          />
+            <label htmlFor="editFieldLocation">Field Location</label>
+            <input
+              id="editFieldLocation"
+              type="text"
+              value={fieldLocation}
+              onChange={(e) => setFieldLocation(e.target.value)}
+            />
 
-          <label htmlFor="editPlantingDate">Planting Date</label>
-          <input
-            id="editPlantingDate"
-            type="date"
-            value={plantingDate}
-            onChange={(e) => setPlantingDate(e.target.value)}
-          />
+            <label htmlFor="editPlantingDate">Planting Date</label>
+            <input
+              id="editPlantingDate"
+              type="date"
+              value={plantingDate}
+              onChange={(e) => setPlantingDate(e.target.value)}
+            />
 
-          <button type="button">
-            Update Crop
-          </button>
+            {error && <p className="error-message">{error}</p>}
 
-          <button type="button" onClick={cancelEdit}>
-            Cancel
-          </button>
+            <button type="submit">
+              Update Crop
+            </button>
+
+            <button type="button" onClick={cancelEdit}>
+              Cancel
+            </button>
+          </form>
         </div>
       )}
 
