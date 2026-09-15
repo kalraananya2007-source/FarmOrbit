@@ -142,5 +142,9 @@
 .navbar-links a.active {
   color: #2e7d32;
   font-weight: bold;
-  border-bottom: 2px solid #2e7d32;
+}
+
+.module-nav-link.active {
+  border-bottom: none;
+  text-decoration: none;
 }

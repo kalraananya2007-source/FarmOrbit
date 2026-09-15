@@ -36,19 +36,19 @@ function Navbar() {
           </li>
 
           <li>
-            <NavLink to="/weather" onClick={() => setMenuOpen(false)}>
+            <NavLink to="/weather" className="module-nav-link" onClick={() => setMenuOpen(false)}>
               Weather
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/market-price" onClick={() => setMenuOpen(false)}>
+            <NavLink to="/market-price" className="module-nav-link" onClick={() => setMenuOpen(false)}>
               Market Price
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/crop-recommendation" onClick={() => setMenuOpen(false)}>
+            <NavLink to="/crop-recommendation" className="module-nav-link" onClick={() => setMenuOpen(false)}>
               Crop Information
             </NavLink>
           </li>
