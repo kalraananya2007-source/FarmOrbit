@@ -279,6 +279,14 @@ function WeatherCard({
                 <p>Rain Chance: {rainChance}%</p>
             </div>
 
+            <div className="farming-advice">
+                <h3>Farming Advice</h3>
+
+                <p>
+                    {getFarmingAdvice(temperature, rainChance)}
+                </p>
+            </div>
+
         </div>
     );
 }
@@ -298,6 +306,23 @@ function getWeatherIcon(condition) {
 
     return "🌤️";
 }
+
+function getFarmingAdvice(temperature, rainChance) {
+    if (rainChance >= 40) {
+        return "🌧️ High chance of rain. Avoid unnecessary irrigation.";
+    }
+
+    if (temperature >= 35) {
+        return "🌱 High temperature. Make sure crops receive adequate water.";
+    }
+
+    if (rainChance <= 15) {
+        return "💧 Low chance of rain. Consider providing irrigation to crops.";
+    }
+
+    return "🌾 Weather conditions are moderate. Continue regular crop care.";
+}
+
 
 // Component for individual forecast card
 function ForecastCard({ day, temp }) {
