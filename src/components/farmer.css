@@ -1,180 +1,445 @@
+/* =========================
+   Farmer Dashboard
+========================= */
+
 .farmer-container {
-  width: 100%;
-  min-height: 100vh;
-  padding: 2rem 4rem;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: inherit;
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+  background: #f8fbf8;
 }
 
-/* Welcome Section */
 
-.farmer-welcome {
-  margin-bottom: 2.5rem;
-}
+/* =========================
+   Welcome Section
+========================= */
 
-.farmer-welcome h1 {
-  color: #1b5e20;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.farmer-welcome p {
-  color: #666;
-  font-size: 1rem;
-}
-
-/* Stats Section */
-
-.farmer-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-}
-
-.stat-card {
-  background-color: #ffffff;
-  border: 1px solid #dcedc8;
-  border-left: 5px solid #2e7d32;
-  border-radius: 10px;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(46, 125, 50, 0.08);
-}
-
-.stat-card h2 {
-  color: #2e7d32;
-  font-size: 2.3rem;
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-}
-
-.stat-card p {
-  color: #555;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Recent Crops Section */
-
-.farmer-recent-crops {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.recent-crops-header {
+.farmer-container .farmer-welcome {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #eee;
+
+  padding: 25px;
+  margin-bottom: 20px;
+
+  background: #e8f5e9;
+  border-radius: 12px;
 }
 
-.recent-crops-header h2 {
+.farmer-container .welcome-content h1 {
+  margin: 0 0 8px;
   color: #1b5e20;
-  font-size: 1.5rem;
-  font-weight: 600;
 }
 
-.add-crop-btn {
-  background-color: #2e7d32;
+.farmer-container .welcome-content p {
+  margin: 0;
+  color: #666;
+}
+
+.farmer-container .dashboard-add-btn {
+  padding: 11px 18px;
+
+  background: #2e7d32;
   color: white;
-  border: none;
-  padding: 0.65rem 1.3rem;
+
+  text-decoration: none;
   border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
 }
 
-.add-crop-btn:hover {
-  background-color: #256428;
+.farmer-container .dashboard-add-btn:hover {
+  background: #256428;
 }
 
-/* Recent Crops List */
 
-.farmer-recent-crops .crop-list {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1rem;
-  width: 100%;
-}
+/* =========================
+   Farmer Summary
+========================= */
 
-/* Each Crop */
-
-.farmer-recent-crops .crop-card {
-  width: 100% !important;
-  box-sizing: border-box;
-  display: flex !important;
-  flex-direction: row !important;
+.farmer-container .farmer-summary {
+  display: flex;
   justify-content: space-between;
   align-items: center;
 
-  background-color: #fafafa;
-  border: 1px solid #eee;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  background: white;
+  border: 1px solid #dcedc8;
+  border-radius: 12px;
+}
+
+.farmer-container .summary-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.farmer-container .farmer-avatar {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #e8f5e9;
+  border-radius: 50%;
+
+  font-size: 28px;
+}
+
+.farmer-container .farmer-info h2 {
+  margin: 0 0 5px;
+  color: #1b5e20;
+}
+
+.farmer-container .farmer-info p {
+  margin: 0 0 5px;
+  color: #666;
+}
+
+.farmer-container .farmer-info span {
+  color: #558b2f;
+  font-size: 13px;
+}
+
+.farmer-container .profile-link {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Statistics
+========================= */
+
+.farmer-container .farmer-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.farmer-container .stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 18px;
+
+  background: white;
+  border: 1px solid #dcedc8;
+  border-radius: 12px;
+}
+
+.farmer-container .stat-icon {
+  font-size: 25px;
+}
+
+.farmer-container .stat-card h2 {
+  margin: 0;
+  color: #1b5e20;
+}
+
+.farmer-container .stat-card p {
+  margin: 3px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+
+/* =========================
+   Dashboard Grid
+========================= */
+
+.farmer-container .dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+
+/* =========================
+   Recent Crops
+========================= */
+
+.farmer-container .farmer-recent-crops {
+  padding: 22px;
+
+  background: white;
+  border: 1px solid #dcedc8;
+  border-radius: 12px;
+}
+
+.farmer-container .recent-crops-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+.farmer-container .recent-crops-header h2 {
+  margin: 0 0 5px;
+  color: #1b5e20;
+}
+
+.farmer-container .recent-crops-header p {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.farmer-container .view-all-btn {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Dashboard Crop List
+========================= */
+
+.farmer-container .dashboard-crop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* =========================
+   Dashboard Crop Card
+========================= */
+
+.farmer-container .dashboard-crop-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px;
+
+  background: #f8fbf8;
+  border: 1px solid #e0eedf;
+  border-radius: 10px;
+}
+
+.farmer-container .dashboard-crop-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.farmer-container .dashboard-crop-icon {
+  font-size: 25px;
+}
+
+.farmer-container .dashboard-crop-details h3 {
+  margin: 0 0 5px;
+  color: #1b5e20;
+}
+
+.farmer-container .dashboard-crop-meta {
+  display: flex;
+  gap: 12px;
+
+  color: #666;
+  font-size: 12px;
+}
+
+.farmer-container .dashboard-crop-date {
+  margin-top: 5px;
+
+  color: #888;
+  font-size: 12px;
+}
+
+
+/* =========================
+   Dashboard Crop Status
+========================= */
+
+.farmer-container .dashboard-crop-status {
+  padding: 6px 12px;
+
+  border-radius: 15px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.farmer-container .dashboard-growing {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.farmer-container .dashboard-harvested {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+
+/* =========================
+   Empty State
+========================= */
+
+.farmer-container .dashboard-no-crops {
+  padding: 40px;
+
+  text-align: center;
+
+  background: #fafdf9;
+  border: 1px dashed #c8e6c9;
+  border-radius: 10px;
+}
+
+.farmer-container .dashboard-empty-icon {
+  font-size: 35px;
+}
+
+.farmer-container .dashboard-no-crops h3 {
+  color: #1b5e20;
+}
+
+.farmer-container .dashboard-no-crops p {
+  color: #777;
+}
+
+.farmer-container .dashboard-empty-btn {
+  display: inline-block;
+
+  padding: 10px 15px;
+
+  background: #2e7d32;
+  color: white;
+
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+
+/* =========================
+   Quick Actions
+========================= */
+
+.farmer-container .quick-actions {
+  padding: 22px;
+
+  background: white;
+  border: 1px solid #dcedc8;
+  border-radius: 12px;
+}
+
+.farmer-container .quick-actions h2 {
+  margin: 0 0 5px;
+  color: #1b5e20;
+}
+
+.farmer-container .quick-actions > p {
+  margin-bottom: 18px;
+  color: #777;
+  font-size: 13px;
+}
+
+.farmer-container .quick-action-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 13px;
+  margin-bottom: 10px;
+
+  background: #f8fbf8;
+  border: 1px solid #e0eedf;
   border-radius: 8px;
 
-  padding: 1rem 1.3rem;
-  margin: 0;
+  text-decoration: none;
 }
 
-.crop-name {
-  font-weight: 600;
+.farmer-container .quick-action-card:hover {
+  background: #e8f5e9;
+}
+
+.farmer-container .quick-icon {
+  font-size: 20px;
+}
+
+.farmer-container .quick-action-content {
+  flex: 1;
+}
+
+.farmer-container .quick-action-content h3 {
+  margin: 0 0 3px;
+
   color: #333;
-  font-size: 1rem;
+  font-size: 14px;
 }
 
-.crop-status {
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 0.35rem 0.8rem;
-  border-radius: 20px;
-  text-transform: uppercase;
+.farmer-container .quick-action-content span {
+  color: #888;
+  font-size: 11px;
 }
 
-.crop-status.growing {
-  background-color: #fff3cd;
-  color: #856404;
+.farmer-container .quick-action-card b {
+  color: #2e7d32;
 }
 
-.crop-status.harvested {
-  background-color: #d4edda;
-  color: #155724;
-}
 
-/* Mobile */
+/* =========================
+   Tablet
+========================= */
 
-@media (max-width: 768px) {
-  .farmer-container {
-    padding: 1.5rem 1rem;
+@media (max-width: 900px) {
+
+  .farmer-container .farmer-stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .farmer-stats {
+  .farmer-container .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+  .farmer-container {
+    padding: 20px 15px;
+  }
+
+  .farmer-container .farmer-welcome {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .farmer-container .dashboard-add-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .farmer-container .farmer-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .farmer-container .farmer-stats {
     grid-template-columns: 1fr;
   }
 
-  .recent-crops-header {
-    flex-direction: column;
+  .farmer-container .dashboard-crop-card {
     align-items: flex-start;
-    gap: 1rem;
   }
 
-  .add-crop-btn {
-    width: 100%;
-  }
-
-  .farmer-recent-crops .crop-card {
-    flex-direction: row !important;
-    justify-content: space-between;
-    align-items: center;
+  .farmer-container .dashboard-crop-meta {
+    flex-direction: column;
+    gap: 3px;
   }
 }
