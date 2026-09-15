@@ -26,6 +26,11 @@ function Register() {
       alert("Passwords do not match!");
       return;
     }
+     const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) {
+    alert(t("invalidEmail")); // add this key in your language context
+    return;
+  }
 
     console.log("Registration Data:", formData);
     alert("Registration successful!");
