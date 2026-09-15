@@ -34,17 +34,25 @@ const locationData = {
 
 // Weather data
 const weatherData = {
+
     Patiala: {
+
         temperature: 31,
+
         condition: "Partly Cloudy",
+
         humidity: 68,
+
         windSpeed: 14,
+
         rainChance: 30,
+
         forecast: [
-            { day: "Yesterday", temp: 29 },
-            { day: "Today", temp: 31 },
-            { day: "Tomorrow", temp: 32 }
+            {day:"Yesterday", temp:29, condition:"Partly Cloudy"},
+            {day:"Today", temp:31, condition:"Partly Cloudy"},
+            {day:"Tomorrow", temp:32, condition:"Sunny"}
         ]
+
     },
 
     Amritsar: {
@@ -54,9 +62,9 @@ const weatherData = {
         windSpeed: 12,
         rainChance: 20,
         forecast: [
-            { day: "Yesterday", temp: 30 },
-            { day: "Today", temp: 32 },
-            { day: "Tomorrow", temp: 31 }
+            { day: "Yesterday", temp: 30, condition: "Sunny" },
+            { day: "Today", temp: 32, condition: "Sunny" },
+            { day: "Tomorrow", temp: 31, condition: "Partly Cloudy" }
         ]
     },
 
@@ -67,9 +75,9 @@ const weatherData = {
         windSpeed: 15,
         rainChance: 35,
         forecast: [
-            { day: "Yesterday", temp: 30},
-            { day: "Today", temp: 32 },
-            { day: "Tomorrow", temp: 33 }
+            { day: "Yesterday", temp: 30, condition: "Cloudy" },
+            { day: "Today", temp: 32, condition: "Cloudy" },
+            { day: "Tomorrow", temp: 33, condition: "Partly Cloudy" }
         ]
     },
 
@@ -80,9 +88,9 @@ const weatherData = {
         windSpeed: 13,
         rainChance: 28,
         forecast: [
-            { day: "Yesterday", temp: 33},
-            { day: "Today", temp: 31 },
-            { day: "Tomorrow", temp: 32 }
+            { day: "Yesterday", temp: 33, condition: "Sunny" },
+            { day: "Today", temp: 31, condition: "Partly Cloudy" },
+            { day: "Tomorrow", temp: 32, condition: "Partly Cloudy" }
         ]
     },
 
@@ -93,9 +101,9 @@ const weatherData = {
         windSpeed: 16,
         rainChance: 15,
         forecast: [
-            { day: "Yesterday", temp: 32},
-            { day: "Today", temp: 34 },
-            { day: "Tomorrow", temp: 35 }
+            { day: "Yesterday", temp: 32, condition: "Partly Cloudy" },
+            { day: "Today", temp: 34, condition: "Sunny" },
+            { day: "Tomorrow", temp: 35, condition: "Sunny" }
         ]
     },
 
@@ -106,9 +114,9 @@ const weatherData = {
         windSpeed: 14,
         rainChance: 30,
         forecast: [
-            { day: "Yesterday", temp: 30},
-            { day: "Today", temp: 32 },
-            { day: "Tomorrow", temp: 33 }
+            { day: "Yesterday", temp: 30, condition: "Cloudy" },
+            { day: "Today", temp: 32, condition: "Cloudy" },
+            { day: "Tomorrow", temp: 33, condition: "Partly Cloudy" }
         ]
     },
 
@@ -132,9 +140,9 @@ const weatherData = {
         windSpeed: 13,
         rainChance: 25,
         forecast: [
-            { day: "Yesterday", temp: 30},
-            { day: "Today", temp: 32 },
-            { day: "Tomorrow", temp: 33 },
+            { day: "Yesterday", temp: 30, condition: "Cloudy" },
+            { day: "Today", temp: 32, condition: "Partly Cloudy" },
+            { day: "Tomorrow", temp: 33, condition: "Sunny" }
         ]
     },
 
@@ -145,9 +153,9 @@ const weatherData = {
     windSpeed: 10,
     rainChance: 40,
     forecast: [
-        { day: "Yesterday", temp: 24},
-        { day: "Today", temp: 22 },
-        { day: "Tomorrow", temp: 23 }
+        { day: "Yesterday", temp: 24, condition: "Partly Cloudy" },
+        { day: "Today", temp: 22, condition: "Cloudy" },
+        { day: "Tomorrow", temp: 23, condition: "Cloudy" }
     ]
 },
 
@@ -158,9 +166,9 @@ Manali: {
     windSpeed: 9,
     rainChance: 45,
     forecast: [
-        { day: "Yesterday", temp: 15},
-        { day: "Today", temp: 18 },
-        { day: "Tomorrow", temp: 19 }
+        { day: "Yesterday", temp: 15, condition: "Cloudy" },
+        { day: "Today", temp: 18, condition: "Partly Cloudy" },
+        { day: "Tomorrow", temp: 19, condition: "Cloudy" }
     ]
 },
 
@@ -171,9 +179,9 @@ Kangra: {
     windSpeed: 11,
     rainChance: 35,
     forecast: [
-        { day: "Yesterday", temp: 23},
-        { day: "Today", temp: 25 },
-        { day: "Tomorrow", temp: 26 }
+        { day: "Yesterday", temp: 23, condition: "Partly Cloudy" },
+        { day: "Today", temp: 25, condition: "Cloudy" },
+        { day: "Tomorrow", temp: 26, condition: "Partly Cloudy" }
     ]
 },
 
@@ -184,9 +192,9 @@ Solan: {
     windSpeed: 10,
     rainChance: 30,
     forecast: [
-        { day: "Yesterday", temp: 22},
-        { day: "Today", temp: 24 },
-        { day: "Tomorrow", temp: 25 }
+        { day: "Yesterday", temp: 22, condition: "Cloudy" },
+        { day: "Today", temp: 24, condition: "Partly Cloudy" },
+        { day: "Tomorrow", temp: 25, condition: "Sunny" }
     ]
 },
 
@@ -197,9 +205,9 @@ Jaipur: {
     windSpeed: 18,
     rainChance: 10,
     forecast: [
-        { day: "Yesterday", temp: 33},
-        { day: "Today", temp: 35 },
-        { day: "Tomorrow", temp: 36 }
+        { day: "Yesterday", temp: 33, condition: "Sunny" },
+        { day: "Today", temp: 35, condition: "Sunny" },
+        { day: "Tomorrow", temp: 36, condition: "Sunny" }
     ]
 },
 
@@ -210,9 +218,9 @@ Jodhpur: {
     windSpeed: 20,
     rainChance: 8,
     forecast: [
-        { day: "Yesterday", temp: 37 },
-        { day: "Today", temp: 36 },
-        { day: "Tomorrow", temp: 38 }
+        { day: "Yesterday", temp: 37, condition: "Sunny" },
+        { day: "Today", temp: 36, condition: "Sunny" },
+        { day: "Tomorrow", temp: 38, condition: "Sunny" }
     ]
 },
 
@@ -223,10 +231,9 @@ Udaipur: {
     windSpeed: 13,
     rainChance: 20,
     forecast: [
-        { day: "Yesterday", temp: 30 },
-        { day: "Today", temp: 31 },
-        { day: "Tomorrow", temp: 32 }
-        
+        { day: "Yesterday", temp: 30, condition: "Cloudy" },
+        { day: "Today", temp: 31, condition: "Partly Cloudy" },
+        { day: "Tomorrow", temp: 32, condition: "Sunny" }
     ]
 },
 
@@ -237,9 +244,9 @@ Kota: {
     windSpeed: 15,
     rainChance: 25,
     forecast: [
-        { day: "Yesterday", temp: 32},
-        { day: "Today", temp: 34 },
-        { day: "Tomorrow", temp: 35 }
+        { day: "Yesterday", temp: 32, condition: "Partly Cloudy" },
+        { day: "Today", temp: 34, condition: "Cloudy" },
+        { day: "Tomorrow", temp: 35, condition: "Sunny" }
     ]
 },    
 
@@ -325,18 +332,18 @@ function getFarmingAdvice(temperature, rainChance) {
 
 
 // Component for individual forecast card
-function ForecastCard({ day, temp }) {
+function ForecastCard({ day, temp, condition }) {
     return (
         <div className="forecast-card">
+            <p className="forecast-day">{day}</p>
 
-            <p className="forecast-day">
-                {day}
-            </p>
+            <div className="forecast-icon">
+                {getWeatherIcon(condition)}
+            </div>
 
-            <p className="forecast-temp">
-                {temp}°C
-            </p>
+            <p className="forecast-temp">{temp}°C</p>
 
+            <p className="forecast-condition">{condition}</p>
         </div>
     );
 }
@@ -414,6 +421,7 @@ function Weather() {
                     key={item.day}
                     day={item.day}
                     temp={item.temp}
+                    condition={item.condition}
                 />
             ))}
 

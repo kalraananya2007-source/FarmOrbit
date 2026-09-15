@@ -245,3 +245,14 @@
     margin: 0;
     line-height: 1.5;
 }
+
+.forecast-icon {
+    font-size: 35px;
+    margin: 8px 0;
+}
+
+.forecast-condition {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #555;
+}
