@@ -96,7 +96,7 @@ function Home() {
       <section className="features">
 
         <div className="section-heading">
-          <span className="section-label">FARMORBIT</span>
+          
 
           <h2 className="section-title">
             {t("whatWeOffer")}
