@@ -260,6 +260,10 @@ function WeatherCard({
             <h2>{location}</h2>
 
             <div className="weather-main">
+                <span className="weather-icon">
+                    {getWeatherIcon(condition)}
+                </span>
+
                 <span className="temperature">
                     {temperature}°C
                 </span>
@@ -277,6 +281,22 @@ function WeatherCard({
 
         </div>
     );
+}
+
+function getWeatherIcon(condition) {
+    if (condition === "Sunny") {
+        return "☀️";
+    }
+
+    if (condition === "Cloudy") {
+        return "☁️";
+    }
+
+    if (condition === "Partly Cloudy") {
+        return "⛅";
+    }
+
+    return "🌤️";
 }
 
 // Component for individual forecast card
