@@ -52,11 +52,8 @@ const marketData = [
 
     { crop: "Onion", market: "Patiala Mandi", price: 2800 },
     { crop: "Onion", market: "Amritsar Mandi", price: 2700 },
-    { crop: "Onion", market: "Hisar Mandi", price: 2900 },
-
+    { crop: "Onion", market: "Hisar Mandi", price: 2900 }
 ];
-
-
 
 function MarketPrice() {
 
@@ -66,8 +63,8 @@ function MarketPrice() {
     const crops = [...new Set(marketData.map(item => item.crop))];
 
     const availableMandis = marketData
-    .filter(item => item.crop === selectedCrop)
-    .map(item => item.market);
+        .filter(item => item.crop === selectedCrop)
+        .map(item => item.market);
 
     const selectedData = marketData.find(
         item =>
@@ -75,9 +72,25 @@ function MarketPrice() {
             item.market === selectedMarket
     );
 
+    // Price comparison for selected crop
+    const cropPrices = marketData.filter(
+        item => item.crop === selectedCrop
+    );
+
+    const highestPrice = cropPrices.length > 0
+        ? Math.max(...cropPrices.map(item => item.price))
+        : 0;
+
+    const lowestPrice = cropPrices.length > 0
+        ? Math.min(...cropPrices.map(item => item.price))
+        : 0;
+
+    const priceDifference = highestPrice - lowestPrice;
+
     return (
         <div className="market-page">
 
+            {/* HERO SECTION */}
             <div className="market-hero">
 
                 <div className="market-icon">
@@ -94,6 +107,7 @@ function MarketPrice() {
             </div>
 
 
+            {/* SELECT SECTION */}
             <div className="market-box">
 
                 <div className="select-group">
@@ -107,15 +121,20 @@ function MarketPrice() {
                             setSelectedMarket("");
                         }}
                     >
+
                         <option value="">
                             Choose a crop
                         </option>
 
                         {crops.map((crop) => (
-                            <option key={crop} value={crop}>
+                            <option
+                                key={crop}
+                                value={crop}
+                            >
                                 {crop}
                             </option>
                         ))}
+
                     </select>
 
                 </div>
@@ -127,17 +146,24 @@ function MarketPrice() {
 
                     <select
                         value={selectedMarket}
-                        onChange={(e) => setSelectedMarket(e.target.value)}
+                        onChange={(e) =>
+                            setSelectedMarket(e.target.value)
+                        }
                     >
+
                         <option value="">
                             Choose a mandi
                         </option>
 
                         {availableMandis.map((mandi) => (
-                            <option key={mandi} value={mandi}>
+                            <option
+                                key={mandi}
+                                value={mandi}
+                            >
                                 {mandi}
                             </option>
                         ))}
+
                     </select>
 
                 </div>
@@ -145,6 +171,7 @@ function MarketPrice() {
             </div>
 
 
+            {/* PRICE SECTION */}
             <div className="price-section">
 
                 {selectedCrop && selectedMarket ? (
@@ -153,34 +180,72 @@ function MarketPrice() {
 
                         <div className="price-card">
 
-                        <img
-                            src={cropImages[selectedCrop]}
-                            alt={selectedCrop}
-                            className="price-image"
-                        />
+                            <img
+                                src={cropImages[selectedCrop]}
+                                alt={selectedCrop}
+                                className="price-image"
+                            />
 
-                    <div className="price-content">
 
-                    <p className="price-heading">
-                    Current Market Price
-                    </p>
+                            <div className="price-content">
 
-                    <h2>
-                        ₹{selectedData.price}
-                    </h2>
+                                <p className="price-heading">
+                                    Current Market Price
+                                </p>
 
-                    <p className="price-unit">
-                        per quintal
-                    </p>
+                                <h2>
+                                    ₹{selectedData.price}
+                                </h2>
 
-                    <div className="price-info">
-                        <span>🌾 {selectedCrop}</span>
-                        <span>📍 {selectedMarket}</span>
-                    </div>
+                                <p className="price-unit">
+                                    per quintal
+                                </p>
 
-                </div>
 
-            </div>
+                                <div className="price-info">
+
+                                    <span>
+                                        🌾 {selectedCrop}
+                                    </span>
+
+                                    <span>
+                                        📍 {selectedMarket}
+                                    </span>
+
+                                </div>
+
+
+                                {/* PRICE COMPARISON */}
+                                <div className="price-comparison">
+
+                                    <h3>
+                                        Price Comparison
+                                    </h3>
+
+                                    <div className="comparison-items">
+
+                                        <span>
+                                            Highest Price:
+                                            ₹{highestPrice}
+                                        </span>
+
+                                        <span>
+                                            Lowest Price:
+                                            ₹{lowestPrice}
+                                        </span>
+
+                                        <span>
+                                            Difference:
+                                            ₹{priceDifference}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     ) : (
 
