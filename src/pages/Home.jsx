@@ -49,50 +49,55 @@ function Home() {
     <div className="home">
 
       {/* ================= HERO SECTION ================= */}
-     {/* Hero Section */}
-<section className="hero">
-  {/* Animated background elements */}
-  <div className="hero-sun"></div>
+      {/* Hero Section */}
+      <section className="hero">
 
-  <div className="hero-cloud hero-cloud-1"></div>
-  <div className="hero-cloud hero-cloud-2"></div>
+        {/* Animated background elements */}
+        <div className="hero-sun"></div>
 
-  <div className="hero-particles">
-    <span>🌱</span>
-    <span>🌿</span>
-    <span>🍃</span>
-    <span>🌱</span>
-    <span>🍃</span>
-    <span>🌿</span>
-  </div>
+        <div className="hero-cloud hero-cloud-1"></div>
+        <div className="hero-cloud hero-cloud-2"></div>
 
-  <div className="hero-content">
-    <div className="hero-badge">
-      🌾 Smart Farming • Better Future
-    </div>
+        <div className="hero-particles">
+          <span>🌱</span>
+          <span>🌿</span>
+          <span>🍃</span>
+          <span>🌱</span>
+          <span>🍃</span>
+          <span>🌿</span>
+        </div>
 
-    <h1>
-      {t("welcome")}
-    </h1>
+        <div className="hero-content">
 
-    <p>
-      {t("homeDescription")}
-    </p>
+          <div className="hero-badge">
+            🌾 Smart Farming • Better Future
+          </div>
 
-    <button
-      className="btn btn-primary hero-btn"
-      onClick={() => navigate("/register")}
-    >
-      <span>{t("getStarted")}</span>
-      <span className="hero-arrow">→</span>
-    </button>
-  </div>
+          <h1>
+            {t("welcome")}
+          </h1>
 
-  {/* Decorative field waves */}
-  <div className="hero-field hero-field-back"></div>
-  <div className="hero-field hero-field-front"></div>
+          <p>
+            {t("homeDescription")}
+          </p>
+
+          <button
+            className="btn btn-primary hero-btn"
+            onClick={() => navigate("/register")}
+          >
+            <span>{t("getStarted")}</span>
+            <span className="hero-arrow">→</span>
+          </button>
+
+        </div>
+
+        {/* Decorative field waves */}
+        <div className="hero-field hero-field-back"></div>
+        <div className="hero-field hero-field-front"></div>
 </section>
-      {/* ================= FEATURES SECTION ================= */}
+     
+      {
+        /* ================= FEATURES SECTION ================= */}
       <section className="features">
 
         <div className="section-heading">

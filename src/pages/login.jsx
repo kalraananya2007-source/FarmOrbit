@@ -18,6 +18,11 @@ function Login() {
       alert(t("fillAllFields"));
       return;
     }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) {
+    alert(t("invalidEmail")); // add this key in your language context
+    return;
+  }
  
     alert(t("loginSuccessful"));
     navigate("/"); // go back to homepage on successful login
