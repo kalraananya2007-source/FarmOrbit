@@ -17,7 +17,8 @@ const cropData = [
         season: "Rabi",
         soil: "Loamy Soil",
         water: "Moderate",
-        duration: "120-150 days"
+        duration: "120-150 days",
+        tip: "Maintain proper soil moisture and avoid excessive watering."
     },
     {
         name: "Rice",
@@ -25,7 +26,8 @@ const cropData = [
         season: "Kharif",
         soil: "Clayey Soil",
         water: "High",
-        duration: "120-150 days"
+        duration: "120-150 days",
+        tip: "Keep the field adequately moist, especially during the early growth stage."
     },
     {
         name: "Maize",
@@ -33,7 +35,8 @@ const cropData = [
         season: "Kharif",
         soil: "Well-drained Soil",
         water: "Moderate",
-        duration: "90-120 days"
+        duration: "90-120 days",
+        tip: "Ensure good drainage and provide regular watering during dry periods."
     },
     {
         name: "Cotton",
@@ -41,7 +44,8 @@ const cropData = [
         season: "Kharif",
         soil: "Black Soil",
         water: "Moderate",
-        duration: "160-180 days"
+        duration: "160-180 days",
+        tip: "Provide adequate sunlight and avoid waterlogging in the field."
     },
     {
         name: "Mustard",
@@ -49,7 +53,8 @@ const cropData = [
         season: "Rabi",
         soil: "Loamy Soil",
         water: "Low",
-        duration: "110-140 days"
+        duration: "110-140 days",
+        tip: "Avoid excessive irrigation because mustard grows well with moderate moisture."
     },
     {
         name: "Onion",
@@ -57,7 +62,8 @@ const cropData = [
         season: "Rabi/Kharif",
         soil: "Loamy Soil",
         water: "Moderate",
-        duration: "100-150 days"
+        duration: "100-150 days",
+        tip: "Maintain regular watering and avoid waterlogging to protect the bulbs."
     },
     {
         name: "Potato",
@@ -65,7 +71,8 @@ const cropData = [
         season: "Rabi",
         soil: "Sandy Loam",
         water: "Moderate",
-        duration: "90-120 days"
+        duration: "90-120 days",
+        tip: "Use well-drained soil and keep the soil moisture consistent during growth."
     },
     {
         name: "Tomato",
@@ -73,11 +80,12 @@ const cropData = [
         season: "Kharif/Rabi",
         soil: "Loamy Soil",
         water: "Moderate",
-        duration: "90-120 days"
+        duration: "90-120 days",
+        tip: "Provide good sunlight and support the plants as they grow."
     }
 ];
 
-function CropCard({ name, image, season, soil, water, duration }) {
+function CropCard({ name, image, season, soil, water, duration, tip }) {
     return (
         <div className="crop-card">
             <img
@@ -103,6 +111,12 @@ function CropCard({ name, image, season, soil, water, duration }) {
             <p>
                 <strong>Growing Duration:</strong> {duration}
             </p>
+
+            <div className="crop-tip">
+                <strong>💡 Farming Tip</strong>
+                <p>{tip}</p>
+            </div>
+
         </div>
     );
 }
@@ -128,6 +142,7 @@ function CropRec() {
                         soil={crop.soil}
                         water={crop.water}
                         duration={crop.duration}
+                        tip={crop.tip}
                     />
                 ))}
             </div>

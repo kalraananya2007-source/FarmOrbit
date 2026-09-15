@@ -71,3 +71,23 @@
     border-radius: 12px;
     margin-bottom: 15px;
 }
+
+.crop-tip {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background-color: #e8f5e9;
+    border-left: 4px solid #2e7d32;
+    border-radius: 10px;
+}
+
+.crop-tip strong {
+    color: #2e7d32;
+    font-size: 16px;
+}
+
+.crop-tip p {
+    margin: 8px 0 0;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+}
