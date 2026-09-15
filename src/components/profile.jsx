@@ -1,24 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./profile.css";
+
+const defaultProfile = {
+  fullName: "Rahul Kumar",
+  email: "rahul@example.com",
+  phone: "9876543210",
+  village: "Rampur",
+  district: "Bareilly",
+  state: "Uttar Pradesh",
+};
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
 
-  const [profile, setProfile] = useState({
-    fullName: "Rahul Kumar",
-    email: "rahul@example.com",
-    phone: "9876543210",
-    village: "Rampur",
-    district: "Bareilly",
-    state: "Haryana",
-  });
+  const [profile, setProfile] = useState(defaultProfile);
 
-  const [formData, setFormData] = useState(profile);
+  const [formData, setFormData] = useState(defaultProfile);
 
   const [profileImage, setProfileImage] = useState(null);
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+
+  // Load saved profile data when page opens
+  useEffect(() => {
+    const savedProfile = localStorage.getItem("farmerProfile");
+    const savedImage = localStorage.getItem("farmerProfileImage");
+
+    if (savedProfile) {
+      const parsedProfile = JSON.parse(savedProfile);
+
+      setProfile(parsedProfile);
+      setFormData(parsedProfile);
+    }
+
+    if (savedImage) {
+      setProfileImage(savedImage);
+    }
+  }, []);
 
   function handleEdit() {
     setFormData(profile);
@@ -56,14 +75,20 @@ function Profile() {
       return;
     }
 
-    const imageUrl = URL.createObjectURL(file);
+    const reader = new FileReader();
 
-    setProfileImage(imageUrl);
+    reader.onloadend = () => {
+      setProfileImage(reader.result);
 
-    setErrors({
-      ...errors,
-      profileImage: "",
-    });
+      localStorage.setItem("farmerProfileImage", reader.result);
+
+      setErrors({
+        ...errors,
+        profileImage: "",
+      });
+    };
+
+    reader.readAsDataURL(file);
   }
 
   function validateForm() {
@@ -123,7 +148,15 @@ function Profile() {
       return;
     }
 
+    // Update React state
     setProfile(formData);
+
+    // Save profile data permanently
+    localStorage.setItem(
+      "farmerProfile",
+      JSON.stringify(formData)
+    );
+
     setIsEditing(false);
     setErrors({});
     setSuccessMessage("Profile updated successfully!");
