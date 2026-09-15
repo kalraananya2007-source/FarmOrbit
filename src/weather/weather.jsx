@@ -1,4 +1,3 @@
-//testing commit
 import React, { useState } from "react";
 import "./weather.css";
 
@@ -36,17 +35,11 @@ const locationData = {
 const weatherData = {
 
     Patiala: {
-
         temperature: 31,
-
         condition: "Partly Cloudy",
-
         humidity: 68,
-
         windSpeed: 14,
-
         rainChance: 30,
-
         forecast: [
             {day:"Yesterday", temp:29, condition:"Partly Cloudy"},
             {day:"Today", temp:31, condition:"Partly Cloudy"},
@@ -127,9 +120,9 @@ const weatherData = {
         windSpeed: 15,
         rainChance: 18,
         forecast: [
-            { day: "Yesterday", temp: 31},
-            { day: "Today", temp: 33 },
-            { day: "Tomorrow", temp: 34 }
+            { day: "Yesterday", temp: 31, condition: "Partly Cloudy" },
+            { day: "Today", temp: 33, condition: "Sunny" },
+            { day: "Tomorrow", temp: 34, condition: "Sunny" }
         ]
     },
 
@@ -286,16 +279,36 @@ function WeatherCard({
                 <p>Rain Chance: {rainChance}%</p>
             </div>
 
+            <div className="weather-status">
+                <h3>Weather Status</h3>
+                <p>
+                    {getWeatherStatus(temperature, rainChance)}
+                </p>
+            </div>
+
             <div className="farming-advice">
                 <h3>Farming Advice</h3>
-
                 <p>
                     {getFarmingAdvice(temperature, rainChance)}
                 </p>
             </div>
 
+            
+
         </div>
     );
+}
+
+function getWeatherStatus(temperature, rainChance) {
+    if (temperature >= 35 || rainChance >= 40) {
+        return "🔴 Extreme Weather";
+    }
+
+    if (temperature >= 33 || rainChance >= 30) {
+        return "🟡 Moderate Conditions";
+    }
+
+    return "🟢 Normal Weather";
 }
 
 function getWeatherIcon(condition) {
