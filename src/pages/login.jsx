@@ -1,94 +1,98 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
-
-function Login({ onLoginSuccess }) {
+import { useLanguage } from "../Languagecontext";
+ 
+function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const { t } = useLanguage();
+  const navigate = useNavigate();
+ 
   const handleLogin = (e) => {
     e.preventDefault();
-
+ 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
+ 
     if (email === "" || password === "") {
-      alert("Please fill in all fields");
+      alert(t("fillAllFields"));
       return;
     }
-
-    alert("Login successful!");
-    onLoginSuccess();
+ 
+    alert(t("loginSuccessful"));
+    navigate("/"); // go back to homepage on successful login
   };
-
+ 
   return (
     <div className="login-page">
-
+ 
       <div className="login-container">
         <div className="login-card">
           <div className="login-icon">🌱</div>
-
-          <h1>Welcome Back</h1>
-
+ 
+          <h1>{t("welcomeBack")}</h1>
+ 
           <p className="login-subtitle">
-            Login to continue to FarmOrbit
+            {t("loginSubtitle")}
           </p>
-
+ 
           <form onSubmit={handleLogin}>
             <div className="input-group">
-              <label htmlFor="email">Email Address</label>
-
+              <label htmlFor="email">{t("emailAddress")}</label>
+ 
               <input
                 type="email"
                 id="email"
-                placeholder="Enter your email"
+                placeholder={t("enterEmail")}
               />
             </div>
-
+ 
             <div className="input-group">
-              <label htmlFor="password">Password</label>
-
+              <label htmlFor="password">{t("password")}</label>
+ 
               <div className="password-box">
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
-                  placeholder="Enter your password"
+                  placeholder={t("enterPassword")}
                 />
-
+ 
                 <button
                   type="button"
                   className="show-password"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? "Hide" : "Show"}
+                  {showPassword ? t("hidePassword") : t("showPassword")}
                 </button>
               </div>
             </div>
-
+ 
             <div className="login-options">
               <label>
                 <input type="checkbox" />
-                Remember me
+                {t("rememberMe")}
               </label>
-
-              <a href="/">Forgot Password?</a>
+ 
+              <a href="/">{t("forgotPassword")}</a>
             </div>
-
+ 
             <button type="submit" className="login-button">
-              Login
+              {t("loginButton")}
             </button>
           </form>
-
+ 
           <div className="divider">
-            <span>or</span>
+            <span>{t("or")}</span>
           </div>
-
+ 
           <p className="register-text">
-            Don't have an account?
-            <a href="/"> Create Account</a>
+            {t("dontHaveAccount")}
+            <Link to="/register"> {t("createAccount")}</Link>
           </p>
         </div>
       </div>
     </div>
   );
 }
-
+ 
 export default Login;

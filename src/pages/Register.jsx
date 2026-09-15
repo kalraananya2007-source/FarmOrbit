@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './Register.css';
-
+import { Link } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -48,9 +48,9 @@ function Register() {
           </p>
 
           <div className="register-features">
-            <div>🌾 Smart Farming</div>
-            <div>📈 Better Market Access</div>
-            <div>🤝 Farmer Community</div>
+            <div> Smart Farming</div>
+            <div> Better Market Access</div>
+            <div> Farmer Community</div>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@ function Register() {
 
           <p className="login-text">
             Already have an account?
-            <span> Login</span>
+            <Link to="/login"> Login</Link>
           </p>
 
         </div>

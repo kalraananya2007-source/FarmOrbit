@@ -1,76 +1,85 @@
+
 import './Home.css';
-import { Link } from 'react-router-dom';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 import cropImg from '../assets/crop.jpg';
 import marketplaceImg from '../assets/marketplace.jpg';
 import weatherImg from '../assets/weather.jpg';
 import communityImg from '../assets/community.jpg';
 
+import { useLanguage } from "../Languagecontext";
+
 // List of features shown as simple cards on the home page
 const features = [
   {
     image: cropImg,
     title: 'Crop Management',
-    desc: 'Farmers can track their crops, sowing dates and expected harvest time.',
+    titleKey: 'cropManagement',
+    descKey: 'cropManagementText',
     link: '/crop-recommendation',
   },
-
   {
     image: marketplaceImg,
     title: 'Marketplace',
-    desc: 'Connect directly with buyers and sell produce at fair prices.',
+    titleKey: 'marketplace',
+    descKey: 'marketplaceText',
     link: '/market-price',
   },
-
   {
     image: weatherImg,
     title: 'Weather Updates',
-    desc: 'Get simple weather information to plan farming activities better.',
+    titleKey: 'weatherUpdates',
+    descKey: 'weatherText',
     link: '/weather',
   },
-
   {
     image: communityImg,
     title: 'Farmer Community',
-    desc: 'A space for farmers to ask questions and share their experience.',
+    titleKey: 'farmerCommunity',
+    descKey: 'farmerCommunityText',
     link: '/farmer',
   },
 ];
 
 function Home({ onFarmerClick }) {
+  const { t } = useLanguage();
+  const navigate = useNavigate();
+
   return (
     <div className="home">
 
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <h1>Welcome to FarmOrbit</h1>
+          <h1>
+            {t("welcome")}
+          </h1>
 
           <p>
-            FarmOrbit is a simple platform that helps farmers manage their
-            farming activities and connect with the right people, all in
-            one place.
+            {t("homeDescription")}
           </p>
 
           <button
             className="btn btn-primary hero-btn"
-            onClick={onFarmerClick}
+            onClick={() => navigate("/register")}
           >
-            Get Started
+            {t("getStarted")}
           </button>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="features">
-        <h2 className="section-title">What FarmOrbit Offers</h2>
+        <h2 className="section-title">
+          {t("whatWeOffer")}
+        </h2>
 
         <p className="section-subtitle">
-          Some of the main features planned for the FarmOrbit platform.
+          {t("featuresSubtitle")}
         </p>
 
         <div className="feature-grid">
-
           {features.map((item) => (
             <Link
               to={item.link}
@@ -78,42 +87,50 @@ function Home({ onFarmerClick }) {
               key={item.title}
             >
               <div className="feature-image">
-                <img src={item.image} alt={item.title} />
+                <img
+                  src={item.image}
+                  alt={t(item.titleKey)}
+                />
               </div>
 
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
+              <h3>
+                {t(item.titleKey)}
+              </h3>
+
+              <p>
+                {t(item.descKey)}
+              </p>
             </Link>
           ))}
-
         </div>
       </section>
 
       {/* About Section */}
       <section className="about">
-        <h2 className="section-title">Why FarmOrbit?</h2>
+        <h2 className="section-title">
+          {t("whyFarmOrbit")}
+        </h2>
 
         <p className="about-text">
-          Many farmers face problems like lack of proper crop information,
-          difficulty finding fair-price buyers, and limited access to
-          weather updates. FarmOrbit aims to solve these problems by
-          bringing all these services together on one easy-to-use platform.
+          {t("aboutFarmOrbit")}
         </p>
       </section>
 
       {/* CTA Section */}
       <section className="cta">
-        <h2>Ready to explore FarmOrbit?</h2>
+        <h2>
+          {t("readyToExplore")}
+        </h2>
 
         <p>
-          Join us and be a part of a smarter farming community.
+          {t("joinCommunity")}
         </p>
 
         <button
           className="btn btn-primary"
-          onClick={onFarmerClick}
+          onClick={() => navigate("/register")}
         >
-          Join Now
+          {t("joinNow")}
         </button>
       </section>
 
@@ -122,3 +139,4 @@ function Home({ onFarmerClick }) {
 }
 
 export default Home;
+
