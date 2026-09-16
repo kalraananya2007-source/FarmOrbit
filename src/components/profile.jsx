@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import "./profile.css";
 
@@ -17,25 +18,18 @@ function Profile() {
 
   const [formData, setFormData] = useState(defaultProfile);
 
-  const [profileImage, setProfileImage] = useState(null);
-
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
 
   // Load saved profile data when page opens
   useEffect(() => {
     const savedProfile = localStorage.getItem("farmerProfile");
-    const savedImage = localStorage.getItem("farmerProfileImage");
 
     if (savedProfile) {
       const parsedProfile = JSON.parse(savedProfile);
 
       setProfile(parsedProfile);
       setFormData(parsedProfile);
-    }
-
-    if (savedImage) {
-      setProfileImage(savedImage);
     }
   }, []);
 
@@ -49,46 +43,11 @@ function Profile() {
   function handleChange(e) {
     const { name, value } = e.target;
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({...formData, [name]: value, });
 
     if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: "",
-      });
+      setErrors({...errors, [name]: "", });
     }
-  }
-
-  function handleImageChange(e) {
-    const file = e.target.files[0];
-
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      setErrors({
-        ...errors,
-        profileImage: "Please select a valid image.",
-      });
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setProfileImage(reader.result);
-
-      localStorage.setItem("farmerProfileImage", reader.result);
-
-      setErrors({
-        ...errors,
-        profileImage: "",
-      });
-    };
-
-    reader.readAsDataURL(file);
   }
 
   function validateForm() {
@@ -175,42 +134,6 @@ function Profile() {
   return (
     <div className="profile-page">
       <div className="profile-card">
-
-        {/* Profile Picture */}
-        <div className="profile-image-section">
-          {profileImage ? (
-            <img
-              src={profileImage}
-              alt="Farmer"
-              className="profile-image"
-            />
-          ) : (
-            <div className="profile-image default-profile">
-              👨‍🌾
-            </div>
-          )}
-
-          {isEditing && (
-            <div className="image-upload">
-              <label htmlFor="profileImage">
-                Change Profile Picture
-              </label>
-
-              <input
-                id="profileImage"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-
-              {errors.profileImage && (
-                <p className="field-error">
-                  {errors.profileImage}
-                </p>
-              )}
-            </div>
-          )}
-        </div>
 
         <h2>Farmer Profile</h2>
 
