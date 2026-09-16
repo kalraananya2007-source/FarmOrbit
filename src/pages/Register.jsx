@@ -1,8 +1,11 @@
 import { useState } from "react";
 import './Register.css';
-import { Link } from "react-router-dom";
-
+import registerFarm from "../assets/register-farm.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useLanguage } from "../Languagecontext";  
 function Register() {
+  const navigate = useNavigate();
+   const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,64 +21,58 @@ function Register() {
       [e.target.name]: e.target.value,
     });
   };
+const handleSubmit = (e) => {
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-     const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(email)) {
-    alert(t("invalidEmail")); // add this key in your language context
+  if (formData.password !== formData.confirmPassword) {
+    alert(t("passwordsDontMatch"));
     return;
   }
 
-    console.log("Registration Data:", formData);
-    alert("Registration successful!");
-  };
+  // Email must have text after the dot
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 
+  if (!emailRegex.test(formData.email)) {
+    alert(t("invalidEmail"));
+    return;
+  }
+
+  console.log("Registration Data:", formData);
+
+  alert(t("registrationSuccessful"));
+
+  navigate("/");
+};
+  
   return (
     <div className="register-page">
-
-      <div className="register-left">
-        <div className="farmorbit-logo">
-          🌱 FarmOrbit
-        </div>
-
-        <div className="register-content">
-          <h1>Grow with FarmOrbit</h1>
-
-          <p>
-            Connect with farmers, discover smart farming solutions,
-            and make your farming journey easier.
-          </p>
-
-          <div className="register-features">
-            <div> Smart Farming</div>
-            <div> Better Market Access</div>
-            <div> Farmer Community</div>
-          </div>
-        </div>
+        <div className="register-left">
+        <img
+          src={registerFarm}
+          alt="FarmOrbit farming"
+          className="register-image"
+        />
       </div>
+      
+     
 
       <div className="register-right">
         <div className="register-card">
 
-          <h2>Create Account</h2>
+          <h2>{t("createAccount")}</h2>
           <p className="register-subtitle">
-            Join FarmOrbit today
+            {t("joinFarmOrbitToday")}
           </p>
 
           <form onSubmit={handleSubmit}>
 
             <div className="input-group">
-              <label>Full Name</label>
+              <label>{t("fullName")}</label>
               <input
                 type="text"
                 name="name"
-                placeholder="Enter your full name"
+                placeholder={t("enterFullName")}
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -83,11 +80,11 @@ function Register() {
             </div>
 
             <div className="input-group">
-              <label>Email Address</label>
+              <label>{t("emailAddress")}</label>
               <input
                 type="email"
                 name="email"
-                placeholder="Enter your email"
+                placeholder={t("enterEmail")}
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -95,11 +92,11 @@ function Register() {
             </div>
 
             <div className="input-group">
-              <label>Phone Number</label>
+              <label>{t("phoneNumber")}</label>
               <input
                 type="tel"
                 name="phone"
-                placeholder="Enter your phone number"
+                placeholder={t("enterPhoneNumber")}
                 value={formData.phone}
                 onChange={handleChange}
                 required
@@ -107,27 +104,27 @@ function Register() {
             </div>
 
             <div className="input-group">
-              <label>I am a</label>
+              <label>{t("iAmA")}</label>
 
               <select
                 name="role"
                 value={formData.role}
                 onChange={handleChange}
               >
-                <option value="Farmer">Farmer</option>
-                <option value="Buyer">Buyer</option>
+                <option value="Farmer">{t("farmerRole")}</option>
+                <option value="Buyer">{t("buyerRole")}</option>
                 <option value="Agriculture Expert">
-                  Agriculture Expert
+                  {t("expertRole")}
                 </option>
               </select>
             </div>
 
             <div className="input-group">
-              <label>Password</label>
+              <label>{t("password")}</label>
               <input
                 type="password"
                 name="password"
-                placeholder="Create a password"
+                placeholder={t("createPassword")}
                 value={formData.password}
                 onChange={handleChange}
                 required
@@ -135,11 +132,11 @@ function Register() {
             </div>
 
             <div className="input-group">
-              <label>Confirm Password</label>
+              <label>{t("confirmPasswordLabel")}</label>
               <input
                 type="password"
                 name="confirmPassword"
-                placeholder="Confirm your password"
+                placeholder={t("confirmYourPassword")}
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
@@ -147,14 +144,14 @@ function Register() {
             </div>
 
             <button type="submit" className="register-btn">
-              Create Account
+             {t("Create Account")}
             </button>
 
           </form>
 
           <p className="login-text">
-            Already have an account?
-            <Link to="/login"> Login</Link>
+            {t("alreadyHaveAccount")}
+            <Link to="/login">{t("login")} </Link>
           </p>
 
         </div>

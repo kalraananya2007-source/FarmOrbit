@@ -16,51 +16,16 @@
 /* ---------- LEFT PANEL ---------- */
 .register-left {
   flex: 1;
-  background: linear-gradient(160deg, #1f4d1f 0%, #2f6b2f 55%, #3f8a3f 100%);
-  color: #ffffff;
-  padding: 60px 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
- 
-.farmorbit-logo {
-  position: absolute;
-  top: 30px;
-  left: 40px;
-  font-size: 24px;
-  font-weight: 700;
-  color: #ffffff;
-}
- 
-.register-content h1 {
-  font-size: 40px;
-  font-weight: 800;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
- 
-.register-content p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #e3f2e3;
-  max-width: 420px;
-  margin-bottom: 40px;
-}
- 
-.register-features {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
- 
-.register-features div {
-  font-size: 16px;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.12);
-  padding: 12px 18px;
-  border-radius: 10px;
-  width: fit-content;
+
+.register-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
  
 /* ---------- RIGHT PANEL ---------- */
