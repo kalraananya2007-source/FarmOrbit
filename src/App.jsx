@@ -31,16 +31,13 @@ function App() {
         <Route path="/farmer" element={<Farmer />} />
 
         {/* Profile Page */}
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/farmer/profile" element={<Profile />} />
 
         {/* Weather Module */}
         <Route path="/weather" element={<Weather />} />
 
         {/* Crop Recommendation */}
-        <Route
-          path="/crop-recommendation"
-          element={<CropRecommendations />}
-        />
+        <Route path="/crop-recommendation" element={<CropRecommendations />} />
 
         {/* Market Price */}
         <Route path="/market-price" element={<MarketPrice />} />

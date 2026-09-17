@@ -65,7 +65,7 @@ function Farmer() {
         </div>
 
         <Link
-          to="/profile"
+          to="/farmer/profile"
           className="profile-link"
         >
           View Profile →
@@ -249,7 +249,7 @@ function Farmer() {
           </Link>
 
           <Link
-            to="/profile"
+            to="/farmer/profile"
             className="quick-action-card"
           >
             <div className="quick-icon">
