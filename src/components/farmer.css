@@ -42,7 +42,7 @@
   background: #2e7d32;
   color: white;
 
-  text-decoration: none;
+  text-decoration: none;   
   border-radius: 6px;
 }
 
@@ -91,11 +91,6 @@
 .farmer-container .farmer-info h2 {
   margin: 0 0 5px;
   color: #1b5e20;
-}
-
-.farmer-container .farmer-info p {
-  margin: 0 0 5px;
-  color: #666;
 }
 
 .farmer-container .farmer-info span {
