@@ -180,19 +180,19 @@ function Home() {
           <div className="about-stats">
 
             <div className="stat">
-              <span className="stat-icon">🌱</span>
+              <span className="stat-icon"></span>
               <strong>Smart</strong>
               <span>Farming</span>
             </div>
 
             <div className="stat">
-              <span className="stat-icon">🌦️</span>
+              <span className="stat-icon"></span>
               <strong>Real-time</strong>
               <span>Information</span>
             </div>
 
             <div className="stat">
-              <span className="stat-icon">🤝</span>
+              <span className="stat-icon"></span>
               <strong>Connected</strong>
               <span>Community</span>
             </div>
