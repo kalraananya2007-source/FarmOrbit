@@ -17,7 +17,6 @@ import Register from './pages/Register';
 
 import AddCrop from './pages/AddCrop';
 import MyCrop from './pages/MyCrop';
-import FarmAtlas from './pages/FarmAtlas';
 
 function App() {
   return (
@@ -53,7 +52,7 @@ function App() {
         {/* Crop Management */}
         <Route path="/add-crop" element={<AddCrop />} />
         <Route path="/my-crops" element={<MyCrop />} />
-        <Route path="/farm-atlas" element={<FarmAtlas />} />
+        
 
         {/* Coming Soon */}
         <Route path="/coming-soon" element={<ComingSoon />} />
