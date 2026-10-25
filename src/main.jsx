@@ -6,7 +6,7 @@ import { store } from './redux/store.js'
 import { LanguageProvider } from "./Languagecontext.jsx";
 import './styles/global.css'
 import App from './App.jsx'
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 createRoot(document.getElementById('root')).render(
 <StrictMode>
   <Provider store={store}>

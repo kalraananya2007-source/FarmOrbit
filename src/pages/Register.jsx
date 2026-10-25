@@ -2,10 +2,12 @@ import { useState } from "react";
 import './Register.css';
 import registerFarm from "../assets/register-farm.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useLanguage } from "../Languagecontext";  
+import { useLanguage } from "../Languagecontext";
+import VoiceInput, { spokenToEmail, spokenToPhone } from "../VoiceInput";
+
 function Register() {
   const navigate = useNavigate();
-   const { t } = useLanguage();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,104 +23,99 @@ function Register() {
       [e.target.name]: e.target.value,
     });
   };
-const handleSubmit = (e) => {
 
-  e.preventDefault();
+  // voice result -> one field (functional update so nothing gets overwritten)
+  const setField = (field, value) =>
+    setFormData((prev) => ({ ...prev, [field]: value }));
 
-  if (formData.password !== formData.confirmPassword) {
-    alert(t("passwordsDontMatch"));
-    return;
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  // Email must have text after the dot
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    if (formData.password !== formData.confirmPassword) {
+      alert(t("passwordsDontMatch"));
+      return;
+    }
 
-  if (!emailRegex.test(formData.email)) {
-    alert(t("invalidEmail"));
-    return;
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      alert(t("invalidEmail"));
+      return;
+    }
 
-  console.log("Registration Data:", formData);
+    console.log("Registration Data:", formData);
+    alert(t("registrationSuccessful"));
+    navigate("/");
+  };
 
-  alert(t("registrationSuccessful"));
-
-  navigate("/");
-};
-  
   return (
     <div className="register-page">
-        <div className="register-left">
-        <img
-          src={registerFarm}
-          alt="FarmOrbit farming"
-          className="register-image"
-        />
+      <div className="register-left">
+        <img src={registerFarm} alt="FarmOrbit farming" className="register-image" />
       </div>
-      
-     
 
       <div className="register-right">
         <div className="register-card">
 
           <h2>{t("createAccount")}</h2>
-          <p className="register-subtitle">
-            {t("joinFarmOrbitToday")}
-          </p>
+          <p className="register-subtitle">{t("joinFarmOrbitToday")}</p>
 
           <form onSubmit={handleSubmit}>
 
             <div className="input-group">
               <label>{t("fullName")}</label>
-              <input
-                type="text"
-                name="name"
-                placeholder={t("enterFullName")}
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
+              <div className="input-with-voice">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder={t("enterFullName")}
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                <VoiceInput onResult={(text) => setField("name", text)} />
+              </div>
             </div>
 
             <div className="input-group">
               <label>{t("emailAddress")}</label>
-              <input
-                type="email"
-                name="email"
-                placeholder={t("enterEmail")}
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+              <div className="input-with-voice">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder={t("enterEmail")}
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <VoiceInput onResult={(text) => setField("email", spokenToEmail(text))} />
+              </div>
             </div>
 
             <div className="input-group">
               <label>{t("phoneNumber")}</label>
-              <input
-                type="tel"
-                name="phone"
-                placeholder={t("enterPhoneNumber")}
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
+              <div className="input-with-voice">
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder={t("enterPhoneNumber")}
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+                <VoiceInput onResult={(text) => setField("phone", spokenToPhone(text))} />
+              </div>
             </div>
 
             <div className="input-group">
               <label>{t("iAmA")}</label>
-
-              <select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-              >
+              <select name="role" value={formData.role} onChange={handleChange}>
                 <option value="Farmer">{t("farmerRole")}</option>
                 <option value="Buyer">{t("buyerRole")}</option>
-                <option value="Agriculture Expert">
-                  {t("expertRole")}
-                </option>
+                <option value="Agriculture Expert">{t("expertRole")}</option>
               </select>
             </div>
 
+            {/* No mic on password fields on purpose (security) */}
             <div className="input-group">
               <label>{t("password")}</label>
               <input
@@ -144,19 +141,18 @@ const handleSubmit = (e) => {
             </div>
 
             <button type="submit" className="register-btn">
-             {t("Create Account")}
+              {t("createAccountBtn")}
             </button>
 
           </form>
 
           <p className="login-text">
             {t("alreadyHaveAccount")}
-            <Link to="/login">{t("login")} </Link>
+            <Link to="/login"> {t("login")}</Link>
           </p>
 
         </div>
       </div>
-
     </div>
   );
 }
