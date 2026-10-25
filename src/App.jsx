@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
+import MyFarms from "./pages/MyFarms";
 import Home from './pages/Home';
 import ComingSoon from './pages/ComingSoon';
 
@@ -36,6 +36,7 @@ function App() {
         {/* Weather Module */}
         <Route path="/weather" element={<Weather />} />
 
+        <Route path="/my-farms" element={<MyFarms />} />
         {/* Crop Recommendation */}
         <Route path="/crop-recommendation" element={<CropRecommendations />} />
 
@@ -51,6 +52,7 @@ function App() {
         {/* Crop Management */}
         <Route path="/add-crop" element={<AddCrop />} />
         <Route path="/my-crops" element={<MyCrop />} />
+        
 
         {/* Coming Soon */}
         <Route path="/coming-soon" element={<ComingSoon />} />

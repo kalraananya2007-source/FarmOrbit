@@ -1,5 +1,3 @@
-
-
 import { createContext, useContext, useState, useEffect } from "react";
 
 const translations = {
@@ -101,6 +99,8 @@ adviceModerate: "🌾 Weather conditions are moderate. Continue regular crop car
     joinNow: "Join Now",
 
     selectLanguage: "Select Language",
+    voiceStart: "Speak",
+    voiceListening: "Listening... tap to stop",
 
     // ---- Login page ----
     welcomeBack: "Welcome Back",
@@ -318,6 +318,8 @@ registrationSuccessful: "पंजीकरण सफल!",
     joinNow: "अभी जुड़ें",
 
     selectLanguage: "भाषा चुनें",
+    voiceStart: "बोलें",
+    voiceListening: "सुन रहा हूँ... रोकने के लिए टैप करें",
 
     // ---- Login page ----
     welcomeBack: "वापसी पर स्वागत है",
@@ -484,6 +486,8 @@ registrationSuccessful: "ਪੰਜੀਕਰਨ ਸਫਲ!",
     joinNow: "ਹੁਣੇ ਜੁੜੋ",
 
     selectLanguage: "ਭਾਸ਼ਾ ਚੁਣੋ",
+    voiceStart: "ਬੋਲੋ",
+    voiceListening: "ਸੁਣ ਰਿਹਾ ਹਾਂ... ਰੋਕਣ ਲਈ ਟੈਪ ਕਰੋ",
 
     // ---- Login page ----
     welcomeBack: "ਮੁੜ ਸੁਆਗਤ ਹੈ",
@@ -509,42 +513,128 @@ registrationSuccessful: "ਪੰਜੀਕਰਨ ਸਫਲ!",
 
 const LanguageContext = createContext();
 
+// Region (state) -> language code. Add more states as you like.
+const REGION_TO_LANGUAGE = {
+  Punjab: "pa",
+  Haryana: "hi",
+  Rajasthan: "hi",
+  "Himachal Pradesh": "hi",
+  Delhi: "hi",
+  "Uttar Pradesh": "hi",
+  "Madhya Pradesh": "hi",
+  Bihar: "hi",
+  Uttarakhand: "hi",
+};
+
+// state name -> language ("en" for any state we don't know), null if no name
+function languageForRegion(region) {
+  if (!region) return null;
+  const key = Object.keys(REGION_TO_LANGUAGE).find(
+    (r) => r.toLowerCase() === region.toLowerCase()
+  );
+  return key ? REGION_TO_LANGUAGE[key] : "en";
+}
+
+// ---- Method 1: GPS (accurate, browser asks the user for permission) ----
+function getGpsPosition() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) return reject(new Error("no geolocation"));
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      timeout: 10000,
+      maximumAge: 10 * 60 * 1000,
+    });
+  });
+}
+
+// coordinates -> state name (free reverse-geocoding, no API key)
+async function regionFromCoords(lat, lon, signal) {
+  const url =
+    "https://api.bigdatacloud.net/data/reverse-geocode-client" +
+    `?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+  const res = await fetch(url, { signal });
+  if (!res.ok) throw new Error("reverse geocode failed");
+  const data = await res.json();
+  return data.principalSubdivision;
+}
+
+// ---- Method 2: IP (approximate, no permission) - used as fallback ----
+async function regionFromIp(signal) {
+  const res = await fetch("https://ipapi.co/json/", { signal });
+  if (!res.ok) throw new Error("ip lookup failed");
+  const data = await res.json();
+  return data.region;
+}
+
+// GPS first -> IP fallback -> null (caller keeps default English)
+async function detectLanguage(signal) {
+  try {
+    const pos = await getGpsPosition();
+    const region = await regionFromCoords(
+      pos.coords.latitude,
+      pos.coords.longitude,
+      signal
+    );
+    const lang = languageForRegion(region);
+    if (lang) return lang;
+  } catch (err) {
+    // permission denied / timeout / network error -> try IP below
+  }
+  try {
+    return languageForRegion(await regionFromIp(signal));
+  } catch (err) {
+    return null;
+  }
+}
+
 export const LanguageProvider = ({ children }) => {
-  // Always start with "en" on both server and first client render,
-  // then sync from localStorage after mount (avoids SSR crash + hydration mismatch).
   const [language, setLanguage] = useState("en");
   const [isReady, setIsReady] = useState(false);
+  const [autoDetected, setAutoDetected] = useState(false); // true if language came from location
 
   useEffect(() => {
-    const saved = localStorage.getItem("language");
-    if (saved && translations[saved]) {
-      setLanguage(saved);
-    }
-    setIsReady(true);
+    const controller = new AbortController();
+
+    const init = async () => {
+      const saved = localStorage.getItem("language");
+
+      if (saved && translations[saved]) {
+        // User already chose a language before -> always respect it
+        setLanguage(saved);
+        setIsReady(true);
+        return;
+      }
+
+      // First visit: show the page right away (don't wait for the permission
+      // popup), then switch language when location comes back.
+      setIsReady(true);
+      const detected = await detectLanguage(controller.signal);
+      
+
+      // ignore result if page closed, or user picked a language meanwhile
+      if (controller.signal.aborted || localStorage.getItem("language")) return;
+      if (detected && translations[detected]) {
+        setLanguage(detected);
+        setAutoDetected(true);
+        // not saved to localStorage: only a manual choice becomes permanent
+      }
+    };
+
+    init();
+    return () => controller.abort();
   }, []);
 
   const changeLanguage = (lang) => {
     if (!translations[lang]) return; // ignore unknown language codes
     setLanguage(lang);
+    setAutoDetected(false);
     localStorage.setItem("language", lang);
   };
 
-  const t = (key) => {
-    return (
-      translations[language]?.[key] ??
-      translations.en[key] ??
-      key
-    );
-  };
+  const t = (key) => translations[language]?.[key] ?? translations.en[key] ?? key;
 
   return (
     <LanguageContext.Provider
-      value={{
-        language,
-        setLanguage: changeLanguage,
-        t,
-        isReady, // useful if you want to hide content until language is resolved
-      }}
+      value={{ language, setLanguage: changeLanguage, t, isReady, autoDetected }}
     >
       {children}
     </LanguageContext.Provider>

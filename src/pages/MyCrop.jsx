@@ -9,8 +9,11 @@ function MyCrops() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [pageError, setPageError] = useState('');
-  const [editingCrop, setEditingCrop] = useState(null);
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState('All Types');
+
+  const [editingCrop, setEditingCrop] = useState(null);
   const [cropName, setCropName] = useState('');
   const [cropType, setCropType] = useState('');
   const [fieldLocation, setFieldLocation] = useState('');
@@ -31,7 +34,7 @@ function MyCrops() {
         throw new Error(result.message || 'Failed to fetch crops.');
       }
 
-      setCrops(result.data);
+      setCrops(result.data || []);
     } catch (err) {
       setPageError(
         err.message === 'Failed to fetch'
@@ -49,11 +52,11 @@ function MyCrops() {
 
   function editCrop(crop) {
     setEditingCrop(crop);
-    setCropName(crop.name);
-    setCropType(crop.type);
-    setFieldLocation(crop.location);
+    setCropName(crop.name || '');
+    setCropType(crop.type || '');
+    setFieldLocation(crop.location || '');
 
-    // Convert MongoDB date into YYYY-MM-DD for the date input
+    // Convert the MongoDB date to YYYY-MM-DD
     setPlantingDate(
       crop.plantingDate ? crop.plantingDate.slice(0, 10) : ''
     );
@@ -90,19 +93,22 @@ function MyCrops() {
     try {
       setSaving(true);
 
-      const response = await fetch(`${API_URL}/${editingCrop._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: cropName.trim(),
-          type: cropType.trim(),
-          location: fieldLocation.trim(),
-          plantingDate,
-          status
-        })
-      });
+      const response = await fetch(
+        `${API_URL}/${editingCrop._id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: cropName.trim(),
+            type: cropType.trim(),
+            location: fieldLocation.trim(),
+            plantingDate,
+            status,
+          }),
+        }
+      );
 
       const result = await response.json();
 
@@ -135,7 +141,7 @@ function MyCrops() {
       setPageError('');
 
       const response = await fetch(`${API_URL}/${cropId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
       });
 
       const result = await response.json();
@@ -171,6 +177,23 @@ function MyCrops() {
     );
   }
 
+  // Get crop types automatically from saved crops
+  const cropTypes = [
+    ...new Set(crops.map((crop) => crop.type).filter(Boolean)),
+  ];
+
+  // Apply both search and type filter
+  const filteredCrops = crops.filter((crop) => {
+    const matchesName = (crop.name || '')
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesType =
+      selectedType === 'All Types' || crop.type === selectedType;
+
+    return matchesName && matchesType;
+  });
+
   return (
     <div className="my-crops">
       <h1>My Crops</h1>
@@ -189,6 +212,37 @@ function MyCrops() {
         </button>
       )}
 
+      {/* Search Bar and Type Filter */}
+      <div className="crop-search-row">
+        <div className="crop-search">
+          <label htmlFor="cropSearch">Search your crops</label>
+          <input
+            id="cropSearch"
+            type="text"
+            placeholder="Enter crop name, e.g. Wheat"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <div className="crop-type-filter">
+          <label htmlFor="cropTypeFilter">Filter by type</label>
+          <select
+            id="cropTypeFilter"
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+          >
+            <option value="All Types">All Types</option>
+            {cropTypes.map((type) => (
+              <option value={type} key={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Edit Crop Form */}
       {editingCrop && (
         <div className="crop-card">
           <h2>Edit Crop</h2>
@@ -250,18 +304,27 @@ function MyCrops() {
               {saving ? 'Updating...' : 'Update Crop'}
             </button>
 
-            <button type="button" onClick={cancelEdit} disabled={saving}>
+            <button
+              type="button"
+              onClick={cancelEdit}
+              disabled={saving}
+            >
               Cancel
             </button>
           </form>
         </div>
       )}
 
+      {/* Crop List */}
       {crops.length === 0 ? (
         <p className="no-crops">No crops added yet.</p>
+      ) : filteredCrops.length === 0 ? (
+        <p className="no-crops">
+          No crops found. Try another name or type.
+        </p>
       ) : (
         <div className="crop-list">
-          {crops.map((crop) => (
+          {filteredCrops.map((crop) => (
             <div className="crop-card" key={crop._id}>
               <h2>{crop.name}</h2>
 

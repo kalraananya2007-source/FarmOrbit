@@ -173,3 +173,29 @@
     text-align: center;
   }
 }
+.input-with-voice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.input-with-voice input {
+  flex: 1;
+}
+.voice-btn {
+  border: 1px solid #c8d8c3;
+  background: #fff;
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+  cursor: pointer;
+   font-size: 20px;
+}
+.voice-btn.listening {
+  background: #ffe9e9;
+  border-color: #e57373;
+  animation: voicePulse 1s infinite;
+}
+@keyframes voicePulse {
+  50% { transform: scale(1.08); }
+}

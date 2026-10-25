@@ -249,6 +249,25 @@ function Farmer() {
           </Link>
 
           <Link
+            to="/my-farms"
+            className="quick-action-card"
+          >
+            <div className="quick-icon">
+              📍
+            </div>
+
+            <div className="quick-action-content">
+              <h3>My Farms</h3>
+
+              <span>
+                View and manage your farms
+              </span>
+            </div>
+
+            <b>→</b>
+          </Link>
+
+          <Link
             to="/farmer/profile"
             className="quick-action-card"
           >

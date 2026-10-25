@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import "./FarmerNavbar.css";
+import "./farmerNavbar.css";
 
 function FarmerNavbar() {
   return (
@@ -20,6 +20,10 @@ function FarmerNavbar() {
 
         <Link to="/my-crops">
           My Crops
+        </Link>
+
+        <Link to="/my-farms">
+          My Farms
         </Link>
 
         <Link to="/farmer/profile">
