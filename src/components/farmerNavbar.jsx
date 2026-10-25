@@ -22,6 +22,10 @@ function FarmerNavbar() {
           My Crops
         </Link>
 
+        <Link to="/my-farms">
+          My Farms
+        </Link>
+
         <Link to="/farmer/profile">
           Profile
         </Link>
