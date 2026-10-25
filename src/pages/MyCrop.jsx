@@ -1,8 +1,11 @@
+
 import { useEffect, useState } from 'react';
 import './MyCrop.css';
 
 function MyCrops() {
   const [crops, setCrops] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState('All Types');
 
   const [editingCrop, setEditingCrop] = useState(null);
 
@@ -14,13 +17,13 @@ function MyCrops() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const savedCrops = JSON.parse(localStorage.getItem('crops')) || [];
+    const savedCrops =
+      JSON.parse(localStorage.getItem('crops')) || [];
     setCrops(savedCrops);
   }, []);
 
   function editCrop(crop) {
     setEditingCrop(crop);
-
     setCropName(crop.name);
     setCropType(crop.type);
     setFieldLocation(crop.location);
@@ -31,7 +34,6 @@ function MyCrops() {
 
   function cancelEdit() {
     setEditingCrop(null);
-
     setCropName('');
     setCropType('');
     setFieldLocation('');
@@ -67,7 +69,6 @@ function MyCrops() {
     localStorage.setItem('crops', JSON.stringify(updatedCrops));
 
     alert('Crop updated successfully!');
-
     cancelEdit();
   }
 
@@ -88,12 +89,64 @@ function MyCrops() {
     localStorage.setItem('crops', JSON.stringify(updatedCrops));
   }
 
+  // Get crop types automatically from saved crops
+  const cropTypes = [
+    ...new Set(crops.map((crop) => crop.type).filter(Boolean))
+  ];
+
+  // Apply both search and type filter
+  const filteredCrops = crops.filter((crop) => {
+    const matchesName = (crop.name || '')
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesType =
+      selectedType === 'All Types' ||
+      crop.type === selectedType;
+
+    return matchesName && matchesType;
+  });
+
   return (
     <div className="my-crops">
       <h1>My Crops</h1>
 
       <p>Total Crops: {crops.length}</p>
 
+      {/* Search Bar and Type Filter */}
+      <div className="crop-search-row">
+        <div className="crop-search">
+          <label htmlFor="cropSearch">Search your crops</label>
+
+          <input
+            id="cropSearch"
+            type="text"
+            placeholder="Enter crop name, e.g. Wheat"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <div className="crop-type-filter">
+          <label htmlFor="cropTypeFilter">Filter by type</label>
+
+          <select
+            id="cropTypeFilter"
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+          >
+            <option value="All Types">All Types</option>
+
+            {cropTypes.map((type) => (
+              <option value={type} key={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* Edit Crop Form */}
       {editingCrop && (
         <div className="crop-card">
           <h2>Edit Crop</h2>
@@ -152,11 +205,16 @@ function MyCrops() {
         </div>
       )}
 
+      {/* Crop List */}
       {crops.length === 0 ? (
         <p className="no-crops">No crops added yet.</p>
+      ) : filteredCrops.length === 0 ? (
+        <p className="no-crops">
+          No crops found. Try another name.
+        </p>
       ) : (
         <div className="crop-list">
-          {crops.map((crop) => (
+          {filteredCrops.map((crop) => (
             <div className="crop-card" key={crop.id}>
               <h2>{crop.name}</h2>
 
@@ -180,7 +238,9 @@ function MyCrops() {
                 Edit Crop
               </button>
 
-              <button onClick={() => deleteCrop(crops.indexOf(crop))}>
+              <button
+                onClick={() => deleteCrop(crops.indexOf(crop))}
+              >
                 Delete Crop
               </button>
             </div>
