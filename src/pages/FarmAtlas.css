@@ -1,0 +1,84 @@
+.atlas-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.atlas-subtitle {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.atlas-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.atlas-map {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.atlas-details {
+  padding: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.atlas-details h2 {
+  margin-top: 0;
+}
+
+.farm-option {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 8px;
+  text-align: left;
+  color: #222;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.farm-option:hover {
+  background: #eaf5e8;
+}
+
+.farm-option.active {
+  background: #e3f3df;
+  border-color: #4b8b3b;
+  font-weight: bold;
+}
+
+.farm-info {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+  overflow-wrap: anywhere;
+}
+
+.farm-info h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .atlas-page {
+    padding: 16px;
+  }
+
+  .atlas-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-details {
+    padding: 16px;
+  }
+}
