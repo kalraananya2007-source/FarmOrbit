@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import "./marketprice.css";
+import { fetchMandiData, searchMandiData } from "../fetchMandiData.js";
+import NearbyMandiComparison from "./NearbyMandiComparison.jsx";
 
 import wheatImage from "../assets/wheat.png";
 import riceImage from "../assets/rice.png";
@@ -11,286 +14,350 @@ import tomatoImage from "../assets/tomato.png";
 import onionImage from "../assets/onion.png";
 
 const cropImages = {
-    Wheat: wheatImage,
-    Rice: riceImage,
-    Maize: maizeImage,
-    Cotton: cottonImage,
-    Mustard: mustardImage,
-    Potato: potatoImage,
-    Tomato: tomatoImage,
-    Onion: onionImage
+  wheat: wheatImage,
+  rice: riceImage,
+  paddy: riceImage,
+  maize: maizeImage,
+  cotton: cottonImage,
+  mustard: mustardImage,
+  potato: potatoImage,
+  tomato: tomatoImage,
+  onion: onionImage,
 };
 
-const marketData = [
-    { crop: "Wheat", market: "Amritsar Mandi", price: 2480 },
-    { crop: "Wheat", market: "Ludhiana Mandi", price: 2500 },
-    { crop: "Wheat", market: "Patiala Mandi", price: 2450 },
+const field = (record, names) => {
+  if (!record) return "";
 
-    { crop: "Rice", market: "Amritsar Mandi", price: 3200 },
-    { crop: "Rice", market: "Ludhiana Mandi", price: 3250 },
-    { crop: "Rice", market: "Karnal Mandi", price: 3300 },
+  const key = Object.keys(record).find((k) =>
+    names.some((name) => k.toLowerCase() === name.toLowerCase())
+  );
 
-    { crop: "Maize", market: "Ludhiana Mandi", price: 2100 },
-    { crop: "Maize", market: "Patiala Mandi", price: 2050 },
-    { crop: "Maize", market: "Hisar Mandi", price: 2150 },
+  return key && record[key] != null ? String(record[key]).trim() : "";
+};
 
-    { crop: "Cotton", market: "Bathinda Mandi", price: 6800 },
-    { crop: "Cotton", market: "Sirsa Mandi", price: 6900 },
-    { crop: "Cotton", market: "Hisar Mandi", price: 6750 },
+const cropOf = (r) =>
+  field(r, ["Commodity", "Crop", "Commodity_Name", "Crop_Name"]);
 
-    { crop: "Mustard", market: "Patiala Mandi", price: 5400 },
-    { crop: "Mustard", market: "Hisar Mandi", price: 5500 },
-    { crop: "Mustard", market: "Kaithal Mandi", price: 5450 },
+const marketOf = (r) =>
+  field(r, ["Market", "Market_Name", "Mandi", "Mandi_Name"]);
 
-    { crop: "Potato", market: "Ludhiana Mandi", price: 1800 },
-    { crop: "Potato", market: "Jalandhar Mandi", price: 1900 },
-    { crop: "Potato", market: "Karnal Mandi", price: 1850 },
+const districtOf = (r) =>
+  field(r, ["District", "District_Name", "City"]);
 
-    { crop: "Tomato", market: "Amritsar Mandi", price: 2200 },
-    { crop: "Tomato", market: "Ludhiana Mandi", price: 2300 },
-    { crop: "Tomato", market: "Panipat Mandi", price: 2250 },
+const stateOf = (r) => field(r, ["State"]);
 
-    { crop: "Onion", market: "Patiala Mandi", price: 2800 },
-    { crop: "Onion", market: "Amritsar Mandi", price: 2700 },
-    { crop: "Onion", market: "Hisar Mandi", price: 2900 }
-];
+const minPriceOf = (r) =>
+  field(r, ["Min_Price", "MinPrice", "Minimum_Price"]);
 
-function MarketPrice() {
+const maxPriceOf = (r) =>
+  field(r, ["Max_Price", "MaxPrice", "Maximum_Price"]);
 
-    const [selectedCrop, setSelectedCrop] = useState("");
-    const [selectedMarket, setSelectedMarket] = useState("");
+const modalPriceOf = (r) =>
+  field(r, ["Modal_Price", "ModalPrice"]);
 
-    const crops = [...new Set(marketData.map(item => item.crop))];
+const dateOf = (r) => field(r, ["Arrival_Date", "Date", "Price_Date"]);
 
-    const availableMandis = marketData
-        .filter(item => item.crop === selectedCrop)
-        .map(item => item.market);
+const parseDate = (value) => {
+  if (!value) return 0;
 
-    const selectedData = marketData.find(
-        item =>
-            item.crop === selectedCrop &&
-            item.market === selectedMarket
-    );
+  const date = String(value).trim();
+  let match = date.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
 
-    // Price comparison for selected crop
-    const cropPrices = marketData.filter(
-        item => item.crop === selectedCrop
-    );
+  if (match) {
+    return new Date(+match[1], +match[2] - 1, +match[3]).getTime();
+  }
 
-    const highestPrice = cropPrices.length > 0
-        ? Math.max(...cropPrices.map(item => item.price))
-        : 0;
+  match = date.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
 
-    const lowestPrice = cropPrices.length > 0
-        ? Math.min(...cropPrices.map(item => item.price))
-        : 0;
+  if (match) {
+    return new Date(+match[3], +match[2] - 1, +match[1]).getTime();
+  }
 
-    const priceDifference = highestPrice - lowestPrice;
+  const timestamp = new Date(date).getTime();
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+};
 
-    return (
-        <div className="market-page">
+const formatPrice = (value) => {
+  if (value === "" || value == null) return "N/A";
 
-            {/* HERO SECTION */}
-            <div className="market-hero">
+  const number = Number(value);
+  return Number.isFinite(number)
+    ? `₹${number.toLocaleString("en-IN")}`
+    : value;
+};
 
-                <div className="market-icon">
-                    🌾
-                </div>
+const MarketPrice = () => {
+  const [marketData, setMarketData] = useState([]);
+  const [cropSearch, setCropSearch] = useState("");
+  const [citySearch, setCitySearch] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-                <h1>Market Prices</h1>
+  useEffect(() => {
+    let cancelled = false;
 
-                <p>
-                    Check the latest crop prices from major
-                    mandis of Punjab and Haryana.
-                </p>
+    const loadInitialData = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
+        const records = await fetchMandiData();
+
+        if (!cancelled) setMarketData(records);
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message || "Mandi data load nahi ho paya.");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    loadInitialData();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleSearch = async () => {
+    const crop = cropSearch.trim();
+    const city = citySearch.trim();
+
+    if (!crop && !city) {
+      setError("Search karne ke liye crop ya city ka naam enter karo.");
+      setHasSearched(false);
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    setHasSearched(true);
+
+    try {
+      const result = await searchMandiData({
+        state: city ? "Punjab" : undefined,
+        district: city || undefined,
+        commodity: crop || undefined,
+        limit: 100,
+      });
+
+      let records = result.records;
+
+      // Filter crop locally as well, ignoring letter case.
+      if (crop) {
+        records = records.filter((r) =>
+          cropOf(r).toLowerCase().includes(crop.toLowerCase())
+        );
+      }
+
+      // If the API fallback returned broader results, match district
+      // OR market name locally. A district-only exact match is not required.
+      if (city) {
+        const matchingCity = records.filter((r) => {
+          const district = districtOf(r).toLowerCase();
+          const market = marketOf(r).toLowerCase();
+
+          return (
+            district.includes(city.toLowerCase()) ||
+            market.includes(city.toLowerCase())
+          );
+        });
+
+        records = matchingCity;
+      }
+
+      setMarketData(records);
+      console.log("API total:", result.total);
+      console.log("Records shown after matching:", records.length);
+      console.log("First matching record:", records[0]);
+    } catch (err) {
+      setMarketData([]);
+      setError(err.message || "Search nahi ho paayi. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClear = async () => {
+    setCropSearch("");
+    setCitySearch("");
+    setHasSearched(false);
+    setError("");
+    setLoading(true);
+
+    try {
+      const records = await fetchMandiData();
+      setMarketData(records);
+    } catch (err) {
+      setMarketData([]);
+      setError(err.message || "Mandi data load nahi ho paya.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const sortedData = [...marketData].sort(
+    (a, b) => parseDate(dateOf(b)) - parseDate(dateOf(a))
+  );
+
+  const latestRecord = hasSearched && sortedData.length
+    ? sortedData[0]
+    : null;
+
+  const latestCrop = latestRecord ? cropOf(latestRecord) || "Unknown Crop" : "";
+  const latestImage = cropImages[latestCrop.toLowerCase()];
+
+  return (
+    <div className="market-price-page">
+      <div className="market-header">
+        <h1>🌾 Mandi Market Prices</h1>
+        <p>Check available crop prices and compare mandi rates.</p>
+      </div>
+
+      <div className="market-search-container">
+        <div className="market-search-box">
+          <label htmlFor="cropSearch">Search Crop</label>
+          <input
+            id="cropSearch"
+            value={cropSearch}
+            onChange={(e) => setCropSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch();
+            }}
+            placeholder="e.g. Wheat, Rice, Tomato"
+          />
+        </div>
+
+        <div className="market-search-box">
+          <label htmlFor="citySearch">Search City / Mandi</label>
+          <input
+            id="citySearch"
+            value={citySearch}
+            onChange={(e) => setCitySearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch();
+            }}
+            placeholder="e.g. Ludhiana, Amritsar"
+          />
+        </div>
+
+        <div className="market-search-buttons">
+          <button
+            type="button"
+            className="market-search-btn"
+            onClick={handleSearch}
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Search Prices"}
+          </button>
+
+          <button
+            type="button"
+            className="market-clear-btn"
+            onClick={handleClear}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+
+      {loading && (
+        <div className="market-message">
+          <p>Loading mandi prices...</p>
+        </div>
+      )}
+
+      {!loading && error && (
+        <div className="market-message market-error">
+          <p>{error}</p>
+          <button type="button" onClick={handleSearch}>
+            Try Again
+          </button>
+        </div>
+      )}
+
+      {!loading && !error && hasSearched && (
+        <section className="market-results">
+          <h2>Latest Market Price</h2>
+
+          <p className="market-result-count">
+            {marketData.length} record(s) found
+          </p>
+
+          {!latestRecord ? (
+            <div className="market-no-results">
+              <h3>No prices found</h3>
+              <p>Try another crop name or city/mandi name.</p>
             </div>
-
-
-            {/* SELECT SECTION */}
-            <div className="market-box">
-
-                <div className="select-group">
-
-                    <label>🌱 Select Crop</label>
-
-                    <select
-                        value={selectedCrop}
-                        onChange={(e) => {
-                            setSelectedCrop(e.target.value);
-                            setSelectedMarket("");
-                        }}
-                    >
-
-                        <option value="">
-                            Choose a crop
-                        </option>
-
-                        {crops.map((crop) => (
-                            <option
-                                key={crop}
-                                value={crop}
-                            >
-                                {crop}
-                            </option>
-                        ))}
-
-                    </select>
-
-                </div>
-
-
-                <div className="select-group">
-
-                    <label>📍 Select Mandi</label>
-
-                    <select
-                        value={selectedMarket}
-                        onChange={(e) =>
-                            setSelectedMarket(e.target.value)
-                        }
-                    >
-
-                        <option value="">
-                            Choose a mandi
-                        </option>
-
-                        {availableMandis.map((mandi) => (
-                            <option
-                                key={mandi}
-                                value={mandi}
-                            >
-                                {mandi}
-                            </option>
-                        ))}
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            {/* PRICE SECTION */}
-            <div className="price-section">
-
-                {selectedCrop && selectedMarket ? (
-
-                    selectedData ? (
-
-                        <div className="price-card">
-
-                            <img
-                                src={cropImages[selectedCrop]}
-                                alt={selectedCrop}
-                                className="price-image"
-                            />
-
-
-                            <div className="price-content">
-
-                                <p className="price-heading">
-                                    Current Market Price
-                                </p>
-
-                                <h2>
-                                    ₹{selectedData.price}
-                                </h2>
-
-                                <p className="price-unit">
-                                    per quintal
-                                </p>
-
-
-                                <div className="price-info">
-
-                                    <span>
-                                        🌾 {selectedCrop}
-                                    </span>
-
-                                    <span>
-                                        📍 {selectedMarket}
-                                    </span>
-
-                                </div>
-
-
-                                {/* PRICE COMPARISON */}
-                                <div className="price-comparison">
-
-                                    <h3>
-                                        Price Comparison
-                                    </h3>
-
-                                    <div className="comparison-items">
-
-                                        <span>
-                                            Highest Price:
-                                            ₹{highestPrice}
-                                        </span>
-
-                                        <span>
-                                            Lowest Price:
-                                            ₹{lowestPrice}
-                                        </span>
-
-                                        <span>
-                                            Difference:
-                                            ₹{priceDifference}
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    ) : (
-
-                        <div className="not-found">
-
-                            <div>📊</div>
-
-                            <h3>
-                                Price not available
-                            </h3>
-
-                            <p>
-                                We don't have price data for
-                                this crop and mandi combination yet.
-                            </p>
-
-                        </div>
-
-                    )
-
-                ) : (
-
-                    <div className="empty-card">
-
-                        <div className="empty-icon">
-                            📈
-                        </div>
-
-                        <h3>
-                            Find Crop Prices
-                        </h3>
-
-                        <p>
-                            Select a crop and mandi above
-                            to check the market price.
-                        </p>
-
-                    </div>
-
+          ) : (
+            <div className="market-cards">
+              <div className="market-card">
+                {latestImage && (
+                  <img
+                    src={latestImage}
+                    alt={latestCrop}
+                    className="market-crop-image"
+                  />
                 )}
 
-            </div>
+                <div className="market-card-content">
+                  <h3>{latestCrop}</h3>
 
+                  <p className="market-location">
+                    📍 {marketOf(latestRecord) || "Unknown Mandi"}
+                    {districtOf(latestRecord)
+                      ? `, ${districtOf(latestRecord)}`
+                      : ""}
+                    {stateOf(latestRecord) ? `, ${stateOf(latestRecord)}` : ""}
+                  </p>
+
+                  <div className="market-price-details">
+                    <p>
+                      <span>Minimum Price</span>
+                      <strong>{formatPrice(minPriceOf(latestRecord))}</strong>
+                    </p>
+                    <p>
+                      <span>Maximum Price</span>
+                      <strong>{formatPrice(maxPriceOf(latestRecord))}</strong>
+                    </p>
+                    <p>
+                      <span>Modal Price</span>
+                      <strong className="market-modal-price">
+                        {formatPrice(modalPriceOf(latestRecord))}
+                      </strong>
+                    </p>
+                  </div>
+
+                  {dateOf(latestRecord) && (
+                    <p className="market-date">
+                      Arrival Date: {dateOf(latestRecord)}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      {!loading && !error && !hasSearched && (
+        <div className="market-message">
+          <h3>Find crop prices in your area</h3>
+          <p>
+            Enter a crop name, a city, or both, then click Search Prices.
+          </p>
         </div>
-    );
-}
+      )}
+
+      {!loading && !error && (
+        <section className="nearby-comparison-section">
+          <NearbyMandiComparison marketData={marketData} />
+        </section>
+      )}
+    </div>
+  );
+};
 
 export default MarketPrice;
