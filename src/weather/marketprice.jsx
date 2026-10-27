@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./marketprice.css";
+
 import { fetchMandiData, searchMandiData } from "../fetchMandiData.js";
 import NearbyMandiComparison from "./NearbyMandiComparison.jsx";
 
@@ -18,12 +19,16 @@ const cropImages = {
   rice: riceImage,
   paddy: riceImage,
   maize: maizeImage,
+  corn: maizeImage,
   cotton: cottonImage,
   mustard: mustardImage,
   potato: potatoImage,
   tomato: tomatoImage,
   onion: onionImage,
 };
+
+const normalize = (value) =>
+  String(value ?? "").trim().toLowerCase();
 
 const field = (record, names) => {
   if (!record) return "";
@@ -32,30 +37,33 @@ const field = (record, names) => {
     names.some((name) => k.toLowerCase() === name.toLowerCase())
   );
 
-  return key && record[key] != null ? String(record[key]).trim() : "";
+  return key && record[key] != null
+    ? String(record[key]).trim()
+    : "";
 };
 
-const cropOf = (r) =>
-  field(r, ["Commodity", "Crop", "Commodity_Name", "Crop_Name"]);
+const cropOf = (record) =>
+  field(record, ["commodity", "crop", "commodity_name", "crop_name"]);
 
-const marketOf = (r) =>
-  field(r, ["Market", "Market_Name", "Mandi", "Mandi_Name"]);
+const marketOf = (record) =>
+  field(record, ["market", "market_name", "mandi", "mandi_name"]);
 
-const districtOf = (r) =>
-  field(r, ["District", "District_Name", "City"]);
+const districtOf = (record) =>
+  field(record, ["district", "district_name", "city"]);
 
-const stateOf = (r) => field(r, ["State"]);
+const stateOf = (record) => field(record, ["state"]);
 
-const minPriceOf = (r) =>
-  field(r, ["Min_Price", "MinPrice", "Minimum_Price"]);
+const minPriceOf = (record) =>
+  field(record, ["min_price", "minprice", "minimum_price"]);
 
-const maxPriceOf = (r) =>
-  field(r, ["Max_Price", "MaxPrice", "Maximum_Price"]);
+const maxPriceOf = (record) =>
+  field(record, ["max_price", "maxprice", "maximum_price"]);
 
-const modalPriceOf = (r) =>
-  field(r, ["Modal_Price", "ModalPrice"]);
+const modalPriceOf = (record) =>
+  field(record, ["modal_price", "modalprice"]);
 
-const dateOf = (r) => field(r, ["Arrival_Date", "Date", "Price_Date"]);
+const dateOf = (record) =>
+  field(record, ["arrival_date", "date", "price_date"]);
 
 const parseDate = (value) => {
   if (!value) return 0;
@@ -64,13 +72,21 @@ const parseDate = (value) => {
   let match = date.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);
 
   if (match) {
-    return new Date(+match[1], +match[2] - 1, +match[3]).getTime();
+    return new Date(
+      Number(match[1]),
+      Number(match[2]) - 1,
+      Number(match[3])
+    ).getTime();
   }
 
   match = date.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})$/);
 
   if (match) {
-    return new Date(+match[3], +match[2] - 1, +match[1]).getTime();
+    return new Date(
+      Number(match[3]),
+      Number(match[2]) - 1,
+      Number(match[1])
+    ).getTime();
   }
 
   const timestamp = new Date(date).getTime();
@@ -81,6 +97,7 @@ const formatPrice = (value) => {
   if (value === "" || value == null) return "N/A";
 
   const number = Number(value);
+
   return Number.isFinite(number)
     ? `₹${number.toLocaleString("en-IN")}`
     : value;
@@ -94,6 +111,7 @@ const MarketPrice = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Load initial mandi records.
   useEffect(() => {
     let cancelled = false;
 
@@ -104,13 +122,17 @@ const MarketPrice = () => {
 
         const records = await fetchMandiData();
 
-        if (!cancelled) setMarketData(records);
+        if (!cancelled) {
+          setMarketData(Array.isArray(records) ? records : []);
+        }
       } catch (err) {
         if (!cancelled) {
           setError(err.message || "Mandi data load nahi ho paya.");
         }
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     };
 
@@ -134,44 +156,63 @@ const MarketPrice = () => {
     setLoading(true);
     setError("");
     setHasSearched(true);
+    setMarketData([]);
 
     try {
       const result = await searchMandiData({
-        state: city ? "Punjab" : undefined,
+        // This assumes the city field contains a district name.
         district: city || undefined,
         commodity: crop || undefined,
         limit: 100,
       });
 
-      let records = result.records;
+      const records = Array.isArray(result?.records)
+        ? result.records
+        : [];
 
-      // Filter crop locally as well, ignoring letter case.
+      // Filter the records returned by the API.
+      let filteredRecords = records;
+
       if (crop) {
-        records = records.filter((r) =>
-          cropOf(r).toLowerCase().includes(crop.toLowerCase())
+        filteredRecords = filteredRecords.filter((record) =>
+          normalize(cropOf(record)).includes(normalize(crop))
         );
       }
 
-      // If the API fallback returned broader results, match district
-      // OR market name locally. A district-only exact match is not required.
       if (city) {
-        const matchingCity = records.filter((r) => {
-          const district = districtOf(r).toLowerCase();
-          const market = marketOf(r).toLowerCase();
+        filteredRecords = filteredRecords.filter((record) => {
+          const district = normalize(districtOf(record));
+          const market = normalize(marketOf(record));
 
           return (
-            district.includes(city.toLowerCase()) ||
-            market.includes(city.toLowerCase())
+            district.includes(normalize(city)) ||
+            market.includes(normalize(city))
           );
         });
-
-        records = matchingCity;
       }
 
-      setMarketData(records);
-      console.log("API total:", result.total);
-      console.log("Records shown after matching:", records.length);
-      console.log("First matching record:", records[0]);
+      // Keep only the filtered records. Do not overwrite them with records.
+      setMarketData(filteredRecords);
+
+      console.log("API total:", result?.total);
+      console.log("API records received:", records.length);
+      console.log("Matching records:", filteredRecords.length);
+      console.log("First API record:", records[0]);
+      console.table(
+        records.map((record) => ({
+          state: stateOf(record),
+          district: districtOf(record),
+          market: marketOf(record),
+          crop: cropOf(record),
+          date: dateOf(record),
+        }))
+      );
+
+      if (filteredRecords.length === 0) {
+        setError(
+          "Matching mandi data nahi mila. F12 > Console mein API records check karo, ya sirf crop name se search karke dekho."
+        );
+      }
     } catch (err) {
       setMarketData([]);
       setError(err.message || "Search nahi ho paayi. Please try again.");
@@ -189,7 +230,7 @@ const MarketPrice = () => {
 
     try {
       const records = await fetchMandiData();
-      setMarketData(records);
+      setMarketData(Array.isArray(records) ? records : []);
     } catch (err) {
       setMarketData([]);
       setError(err.message || "Mandi data load nahi ho paya.");
@@ -206,8 +247,11 @@ const MarketPrice = () => {
     ? sortedData[0]
     : null;
 
-  const latestCrop = latestRecord ? cropOf(latestRecord) || "Unknown Crop" : "";
-  const latestImage = cropImages[latestCrop.toLowerCase()];
+  const latestCrop = latestRecord
+    ? cropOf(latestRecord) || "Unknown Crop"
+    : "";
+
+  const latestImage = cropImages[normalize(latestCrop)];
 
   return (
     <div className="market-price-page">
@@ -224,20 +268,20 @@ const MarketPrice = () => {
             value={cropSearch}
             onChange={(e) => setCropSearch(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") handleSearch();
+              if (e.key === "Enter" && !loading) handleSearch();
             }}
             placeholder="e.g. Wheat, Rice, Tomato"
           />
         </div>
 
         <div className="market-search-box">
-          <label htmlFor="citySearch">Search City / Mandi</label>
+          <label htmlFor="citySearch">Search District / Mandi</label>
           <input
             id="citySearch"
             value={citySearch}
             onChange={(e) => setCitySearch(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === "Enter") handleSearch();
+              if (e.key === "Enter" && !loading) handleSearch();
             }}
             placeholder="e.g. Ludhiana, Amritsar"
           />
@@ -257,6 +301,7 @@ const MarketPrice = () => {
             type="button"
             className="market-clear-btn"
             onClick={handleClear}
+            disabled={loading}
           >
             Clear
           </button>
@@ -289,7 +334,7 @@ const MarketPrice = () => {
           {!latestRecord ? (
             <div className="market-no-results">
               <h3>No prices found</h3>
-              <p>Try another crop name or city/mandi name.</p>
+              <p>Try another crop name or district/mandi name.</p>
             </div>
           ) : (
             <div className="market-cards">
@@ -310,7 +355,9 @@ const MarketPrice = () => {
                     {districtOf(latestRecord)
                       ? `, ${districtOf(latestRecord)}`
                       : ""}
-                    {stateOf(latestRecord) ? `, ${stateOf(latestRecord)}` : ""}
+                    {stateOf(latestRecord)
+                      ? `, ${stateOf(latestRecord)}`
+                      : ""}
                   </p>
 
                   <div className="market-price-details">
@@ -318,10 +365,12 @@ const MarketPrice = () => {
                       <span>Minimum Price</span>
                       <strong>{formatPrice(minPriceOf(latestRecord))}</strong>
                     </p>
+
                     <p>
                       <span>Maximum Price</span>
                       <strong>{formatPrice(maxPriceOf(latestRecord))}</strong>
                     </p>
+
                     <p>
                       <span>Modal Price</span>
                       <strong className="market-modal-price">
@@ -346,7 +395,7 @@ const MarketPrice = () => {
         <div className="market-message">
           <h3>Find crop prices in your area</h3>
           <p>
-            Enter a crop name, a city, or both, then click Search Prices.
+            Enter a crop name, a district, or both, then click Search Prices.
           </p>
         </div>
       )}
